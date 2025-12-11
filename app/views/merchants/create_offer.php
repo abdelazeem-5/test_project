@@ -5,127 +5,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Offer</title>
 
-    <style>
+<style>
 
-        /* 🔵 زر Merchant Panel أعلى الشمال */
-        .merchant-panel-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: #007bff;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            transition: 0.3s;
-            z-index: 999;
-        }
-        .merchant-panel-btn:hover {
-            background: #0056b3;
-        }
+    /* ===== زر Merchant Panel أعلى الشمال ===== */
+    .back-top-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: #007bff;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.3s;
+        z-index: 999;
+    }
+    .back-top-btn:hover {
+        background: #0056b3;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            margin: 0;
-            padding: 0;
-        }
+    /* ===== خلفية محترفة مثل صفحة اللوجين ===== */
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        font-family: "Segoe UI", Arial, sans-serif;
 
-        h2 {
-            text-align: center;
-            font-size: 28px;
-            color: #333;
-            margin-top: 60px;
-            margin-bottom: 20px;
-        }
+        background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
+        background-size: 300% 300%;
+        animation: bgMove 10s infinite alternate ease-in-out;
 
-        form {
-            width: 90%;
-            max-width: 380px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-        /* 👇 أهم جزء يصلح ميل العناصر */
-        input, textarea, button {
-            width: 100%;
-            box-sizing: border-box;
-        }
+    @keyframes bgMove {
+        from { background-position: left; }
+        to   { background-position: right; }
+    }
 
-        input, textarea {
-            padding: 12px;
-            margin: 10px 0 15px 0;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            transition: 0.3s;
-        }
+    /* ===== صندوق إضافة العرض (نفس شكل البروفايل) ===== */
+    .offer-box {
+        width: 90%;
+        max-width: 400px;
+        padding: 35px;
+        border-radius: 16px;
 
-        input:focus, textarea:focus {
-            border-color: #007bff;
-            background: #e9f2ff;
-            outline: none;
-            box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
-        }
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
 
-        textarea {
-            height: 120px;
-            resize: vertical;
-        }
+        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        animation: fadeIn 0.7s ease;
+    }
 
-        button {
-            padding: 12px;
-            font-size: 18px;
-            background: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 5px;
-        }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
 
-        button:hover {
-            background: #0056b3;
-        }
+    h2 {
+        text-align: center;
+        color: white;
+        font-size: 30px;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
 
-        .focused {
-            transform: scale(1.02);
-        }
-    </style>
+    label {
+        color: #e3e9ff;
+        font-weight: 600;
+        font-size: 15px;
+        margin-top: 15px;
+        display: block;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 13px;
+        margin-top: 6px;
+        border-radius: 10px;
+        font-size: 16px;
+
+        background: rgba(255,255,255,0.9);
+        border: 1px solid #b8c6e0;
+
+        transition: 0.25s;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        height: 120px;
+        resize: vertical;
+    }
+
+    input:focus, textarea:focus {
+        border-color: #64b5f6;
+        background: #eef6ff;
+        outline: none;
+        box-shadow: 0 0 10px rgba(100,181,246,0.7);
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        font-size: 18px;
+        margin-top: 25px;
+
+        background: #2196f3;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+
+        font-weight: 600;
+        transition: 0.25s;
+        box-sizing: border-box;
+    }
+
+    button:hover {
+        background: #0d8af0;
+        transform: translateY(-2px);
+    }
+
+</style>
+
 </head>
 
 <body>
 
-<!-- 🔵 زر Merchant Panel أعلى الشمال -->
-<a class="merchant-panel-btn" href="/Test_project/public/merchant/dashboard">← Merchant Panel</a>
+<!-- 🔵 زر Merchant Panel -->
+<a class="back-top-btn" href="/Test_project/public/merchant/dashboard">← Merchant Panel</a>
 
-<h2>Add New Offer</h2>
+<div class="offer-box">
 
-<form action="/Test_project/public/merchant/offers/create" method="POST">
+    <h2>Add New Offer</h2>
 
-    <input type="text" name="title" placeholder="Offer Title" required>
+    <form action="/Test_project/public/merchant/offers/create" method="POST">
 
-    <textarea name="description" placeholder="Offer Description"></textarea>
+        <label>Offer Title:</label>
+        <input type="text" name="title" placeholder="Offer Title" required>
 
-    <input type="text" name="discount_value" placeholder="Discount Value" required>
+        <label>Description:</label>
+        <textarea name="description" placeholder="Offer Description"></textarea>
 
-    <button type="submit">Add Offer</button>
-</form>
+        <label>Discount Value:</label>
+        <input type="text" name="discount_value" placeholder="Discount Value" required>
 
-<script>
-    const fields = document.querySelectorAll("input, textarea");
+        <button type="submit">Add Offer</button>
+    </form>
 
-    fields.forEach(field => {
-        field.addEventListener("focus", () => field.classList.add("focused"));
-        field.addEventListener("blur", () => field.classList.remove("focused"));
-    });
-</script>
+</div>
 
 </body>
 </html>
