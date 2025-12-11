@@ -122,5 +122,24 @@ public function updateMerchant(int $merchantId, string $name, string $email, ?st
     return $stmt->execute($params);
 }
 
+/* ================================
+   DELETE CUSTOMER
+================================ */
+public function deleteCustomer($id)
+{
+    $stmt = $this->conn->prepare("DELETE FROM customers WHERE customer_id = ?");
+    return $stmt->execute([$id]);
+}
+
+/* ================================
+   DELETE MERCHANT
+================================ */
+public function deleteMerchant($id)
+{
+    $stmt = $this->conn->prepare("DELETE FROM merchants WHERE merchant_id = ?");
+    return $stmt->execute([$id]);
+}
+
+
     
 }

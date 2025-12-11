@@ -162,55 +162,6 @@ class MerchantController
     }
 
 
-//     public function profile()
-// {
-//     if (!isset($_SESSION['user']) || ($_SESSION['role'] ?? null) !== 'merchant') {
-//         header("Location: /Test_project/public/login");
-//         exit;
-//     }
-
-//     $merchant = $_SESSION['user'];
-
-//     $userModel = new UserModel("merchant");
-
-//     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-//         $name     = $_POST['name'] ?? '';
-//         $email    = $_POST['email'] ?? '';
-//         $password = $_POST['password'] ?? '';
-
-//         if (!$name || !$email) {
-//             $error = "Name and email are required.";
-//             require ROOT_PATH . "/app/views/merchants/profile.php";
-//             return;
-//         }
-
-//         $passwordToSave = $password !== '' ? $password : null;
-
-//         $updated = $userModel->updateMerchant(
-//             (int)$merchant['merchant_id'],
-//             $name,
-//             $email,
-//             $passwordToSave
-//         );
-
-//         if ($updated) {
-//             // حدّث السيشن
-//             $_SESSION['user']['name']  = $name;
-//             $_SESSION['user']['email'] = $email;
-//             $success = "Profile updated successfully.";
-//         } else {
-//             $error = "Failed to update profile.";
-//         }
-
-//         require ROOT_PATH . "/app/views/merchants/profile.php";
-//         return;
-//     }
-
-//     // GET → عرض النموذج
-//     require ROOT_PATH . "/app/views/merchants/profile.php";
-// }
-
 
 public function profile()
 {

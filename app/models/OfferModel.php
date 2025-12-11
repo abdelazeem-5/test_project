@@ -149,23 +149,6 @@ class OfferModel
         ]);
     }
 
-    // =====================================================
-    // GET ALL REDEEMED OFFERS FOR CUSTOMER
-    // =====================================================
-    // public function getRedeemedOffersByCustomer($customer_id)
-    // {
-    //     $stmt = $this->conn->prepare("
-    //         SELECT o.title, o.description, o.discount_value, co.redeemed_at
-    //         FROM customer_offers co
-    //         JOIN offers o ON co.offer_id = o.offer_id
-    //         WHERE co.customer_id = :customer_id
-    //         ORDER BY co.redeemed_at DESC
-    //     ");
-
-    //     $stmt->execute([":customer_id" => $customer_id]);
-
-    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }
 
 
     public function getCustomerRedeemedOffers($customer_id)

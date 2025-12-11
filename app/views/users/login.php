@@ -201,7 +201,7 @@ input, textarea, select, button {
 
 <!-- BRANDING -->
 <div class="brand">
-    <h1>Loyalty</h1>
+    <h1>Login</h1>
     <p>Your smart rewards system</p>
 </div>
 

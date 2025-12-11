@@ -12,21 +12,6 @@ class SubscriptionModel
         $this->conn = $db->connect();
     }
 
-    // Create subscription (customer only - no merchant)
-    // public function createSubscription(int $customer_id, string $tier = 'silver', string $program_type = 'points_based'): bool
-    // {
-    //     $query = "INSERT INTO {$this->table} 
-    //               (customer_id, tier, program_type) 
-    //               VALUES (:customer_id, :tier, :program_type)";
-
-    //     $stmt = $this->conn->prepare($query);
-
-    //     return $stmt->execute([
-    //         ":customer_id" => $customer_id,
-    //         ":tier"        => $tier,
-    //         ":program_type"=> $program_type
-    //     ]);
-    // }
 
     public function createSubscription($customer_id, $tier = 'silver', $program_type = 'points_based')
 {
@@ -128,8 +113,15 @@ public function getSubscriptionByCustomerId($customerId)
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+public function deleteSubscription($id)
+{
+    $stmt = $this->conn->prepare("
+        DELETE FROM subscriptions 
+        WHERE subscription_id = :id
+    ");
 
-
+    return $stmt->execute([":id" => $id]);
+}
 
 
 

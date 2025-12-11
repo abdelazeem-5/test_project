@@ -47,6 +47,7 @@ $router->add("/subscription/mine", function () {
     (new SubscriptionController())->mySubscriptions($_GET['customer_id']);
 });
 
+
 /* ------------------ Admin ------------------ */
 $router->add("/admins/login", fn() => (new AdminController())->login());
 $router->add("/admins/dashboard", fn() => (new AdminController())->dashboard());
@@ -54,10 +55,20 @@ $router->add("/admins/dashboard", fn() => (new AdminController())->dashboard());
 $router->add("/admins/view_customers", fn() => (new AdminController())->viewCustomers());
 $router->add("/admins/view_merchants", fn() => (new AdminController())->viewMerchants());
 $router->add("/admins/view_subscriptions", fn() => (new AdminController())->viewSubscriptions());
+$router->add("/admins/view_offers", fn() => (new AdminController())->getAllOffers());
+
+/* ---- DELETE ROUTES ---- */
+$router->add("/admins/delete_customer", fn() => (new AdminController())->deleteCustomer());
+$router->add("/admins/delete_merchant", fn() => (new AdminController())->deleteMerchant());
+$router->add("/admins/delete_offer", fn() => (new AdminController())->deleteOffer());
+$router->add("/admins/delete_subscription", fn() => (new AdminController())->deleteSubscription());
+
+
 
 /* ------------------ Merchant ------------------ */
 $router->add("/merchant/dashboard", fn() => (new MerchantController())->dashboard());
 $router->add("/merchant/purchase", fn() => (new MerchantController())->purchase());
+
 
 /* ------------------ Customer ------------------ */
 $router->add("/customer/redeem-offer", fn() => (new UserController())->redeemOffer());
