@@ -10,32 +10,56 @@
 
     <style>
         body {
-            background: #f8f9fa;
+            background: #f4f6f9; /* موحّد مع باقي الصفحات */
         }
+
+        /* Sidebar */
         .sidebar {
             height: 100vh;
-            background: #343a40;
+            background: #0d1b2a; /* أزرق غامق أنيق */
             color: white;
             padding: 20px;
         }
+
         .sidebar a {
-            color: #ddd;
+            color: #cfd9e6; /* أزرق فاتح */
             display: block;
             padding: 10px 0;
             text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
         }
+
         .sidebar a:hover {
-            color: white;
+            color: #ffffff;
+            background: #007bff; /* نفس الزر المستخدم في بقية الصفحات */
+            padding-left: 12px;
+            border-radius: 6px;
         }
+
+        /* Content area */
         .content {
             padding: 30px;
         }
+
+        h2 {
+            color: #333;
+        }
+
+        /* Dashboard cards */
         .card-box {
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 10px;
             background: white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             margin-bottom: 20px;
+            border-left: 6px solid #007bff; /* توحيد التصميم */
+            transition: 0.3s;
+        }
+
+        .card-box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
         }
     </style>
 </head>
@@ -46,14 +70,12 @@
 
     <div class="col-3 sidebar">
         <h3>Admin Panel</h3>
-        <hr>
+        <hr style="border-color:#cfd9e6">
 
         <a href="/Test_project/public/admins/dashboard">🏠 Dashboard</a>
         <a href="/Test_project/public/admins/view_customers">👥 View Customers</a>
         <a href="/Test_project/public/admins/view_merchants">🛒 View Merchants</a>
         <a href="/Test_project/public/admins/view_subscriptions">📄 View Subscriptions</a>
-
-        <!-- Logout يبقى كما طلبت: يرجع للهوم بيدج -->
         <a href="/Test_project/public">🚪 Logout</a>
     </div>
 
@@ -61,6 +83,7 @@
         <h2>Welcome, Admin!</h2>
 
         <div class="row mt-4">
+
             <div class="col-md-4">
                 <div class="card-box">
                     <h4>Total Customers</h4>
@@ -81,6 +104,7 @@
                     <p><?= $subscriptionCount ?? 0 ?></p>
                 </div>
             </div>
+
         </div>
 
     </div>

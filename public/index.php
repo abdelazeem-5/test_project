@@ -25,7 +25,6 @@ $router->add("/select-user-type", fn() => (new UserController())->selectUserType
 $router->add("/register-customer", fn() => (new UserController())->registerCustomer());
 $router->add("/register-merchant", fn() => (new UserController())->registerMerchant());
 $router->add("/login", fn() => (new UserController())->login());
-
 $router->add("/logout", fn() => (new UserController())->logout());
 
 $router->add("/register", function () {
@@ -60,18 +59,13 @@ $router->add("/admins/view_subscriptions", fn() => (new AdminController())->view
 $router->add("/merchant/dashboard", fn() => (new MerchantController())->dashboard());
 $router->add("/merchant/purchase", fn() => (new MerchantController())->purchase());
 
-/* ------------------ Customer (NO MORE customer/home) ------------------ */
-/* لما يدخل كاستمر → يروح الهوم بيدج فقط */
-
+/* ------------------ Customer ------------------ */
 $router->add("/customer/redeem-offer", fn() => (new UserController())->redeemOffer());
-
 $router->add("/customer/redeemed-offers", fn() => (new UserController())->redeemedOffers());
 
 /* ------------------ Merchant Offers ------------------ */
 $router->add("/merchant/offers", fn() => (new MerchantController())->offers());
-
 $router->add("/merchant/offers/create", fn() => (new MerchantController())->createOffer());
-
 $router->add("/merchant/offers/edit-list", fn() => (new MerchantController())->editOffers());
 $router->add("/merchant/offers/delete-list", fn() => (new MerchantController())->deleteOffers());
 
@@ -84,6 +78,28 @@ $router->add("/merchant/offers/delete", function () {
     if (!isset($_GET['id'])) return print("Missing Offer ID");
     (new MerchantController())->deleteOfferById((int)$_GET['id']);
 });
+
+$router->add("/merchant/profile", fn() => (new MerchantController())->profile());
+$router->add("/merchant/my-offers", fn() => (new MerchantController())->myOffers());
+
+
+/* ------------------ Customer Dashboard & Profile ------------------ */
+$router->add("/customer/dashboard", fn() => (new UserController())->customerDashboard());
+$router->add("/customer/profile", fn() => (new UserController())->customerProfile());
+
+
+$router->add("/customer/dashboard", fn() => (new UserController())->customerDashboard());
+$router->add("/customer/profile", fn() => (new UserController())->customerProfile());
+$router->add("/customer/redeemed-offers", fn() => (new UserController())->redeemedOffers());
+
+
+
+$router->add("/offers", fn() => (new UserController())->viewOffers());
+
+$router->add("/customer/confirm-redeem", function () {
+    (new UserController())->confirmRedeem();
+});
+
 
 /* ------------------ Path Handling ------------------ */
 $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);

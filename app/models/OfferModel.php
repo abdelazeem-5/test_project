@@ -31,7 +31,7 @@ class OfferModel
     }
 
     // =====================================================
-    // GET ALL OFFERS FOR HOME PAGE
+    // GET ALL OFFERS
     // =====================================================
     public function getAllOffers()
     {
@@ -44,7 +44,7 @@ class OfferModel
     }
 
     // =====================================================
-    // GET OFFERS BY MERCHANT (للوحة التاجر)
+    // GET OFFERS BY MERCHANT
     // =====================================================
     public function getOffersByMerchant(int $merchant_id): array
     {
@@ -60,7 +60,7 @@ class OfferModel
     }
 
     // =====================================================
-    // UPDATE OFFER (يُستخدم في editOfferById)
+    // UPDATE OFFER
     // =====================================================
     public function updateOffer(int $offer_id, string $title, string $description, string $discount): bool
     {
@@ -81,7 +81,7 @@ class OfferModel
     }
 
     // =====================================================
-    // DELETE OFFER (يُستخدم في deleteOfferById)
+    // DELETE OFFER
     // =====================================================
     public function deleteOffer(int $offer_id): bool
     {
@@ -94,23 +94,23 @@ class OfferModel
     }
 
     // =====================================================
-    // REDEEM OFFER (لو حبيت تستخدمها لاحقاً)
+    // GET OFFER BY ID
     // =====================================================
-    public function redeemOffer($customer_id, $offer_id)
+    public function getOfferById($id)
     {
         $stmt = $this->conn->prepare("
-            INSERT INTO customer_offers (customer_id, offer_id)
-            VALUES (:customer_id, :offer_id)
+            SELECT * FROM offers
+            WHERE offer_id = :id
+            LIMIT 1
         ");
 
-        return $stmt->execute([
-            ":customer_id" => $customer_id,
-            ":offer_id"    => $offer_id
-        ]);
+        $stmt->execute([":id" => $id]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     // =====================================================
-    // CHECK IF OFFER ALREADY REDEEMED
+    // CHECK IF CUSTOMER ALREADY REDEEMED THIS OFFER
     // =====================================================
     public function isOfferRedeemed($customer_id, $offer_id)
     {
@@ -129,36 +129,57 @@ class OfferModel
     }
 
     // =====================================================
-    // GET ALL REDEEMED OFFERS FOR A CUSTOMER
+    // LOG REDEEM (USE OFFER ONCE ONLY)
     // =====================================================
-    public function getRedeemedOffers($customer_id)
+    public function logRedeem($customer_id, $offer_id)
     {
+        // ❌ لو العميل استخدم العرض قبل كده → نمنع التكرار
+        if ($this->isOfferRedeemed($customer_id, $offer_id)) {
+            return false;
+        }
+
         $stmt = $this->conn->prepare("
-            SELECT o.title, o.description, o.discount_value, co.redeemed_at
-            FROM customer_offers co
-            JOIN offers o ON co.offer_id = o.offer_id
-            WHERE co.customer_id = :customer_id
-            ORDER BY co.redeemed_at DESC
+            INSERT INTO customer_offers (customer_id, offer_id)
+            VALUES (:customer_id, :offer_id)
         ");
 
-        $stmt->execute([":customer_id" => $customer_id]);
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->execute([
+            ":customer_id" => $customer_id,
+            ":offer_id"    => $offer_id
+        ]);
     }
 
     // =====================================================
-    // GET OFFER BY ID  (NEEDED FOR RECEIPT PAGE)
+    // GET ALL REDEEMED OFFERS FOR CUSTOMER
     // =====================================================
-    public function getOfferById($id)
-    {
-        $stmt = $this->conn->prepare("
-            SELECT * FROM offers
-            WHERE offer_id = :id
-            LIMIT 1
-        ");
+    // public function getRedeemedOffersByCustomer($customer_id)
+    // {
+    //     $stmt = $this->conn->prepare("
+    //         SELECT o.title, o.description, o.discount_value, co.redeemed_at
+    //         FROM customer_offers co
+    //         JOIN offers o ON co.offer_id = o.offer_id
+    //         WHERE co.customer_id = :customer_id
+    //         ORDER BY co.redeemed_at DESC
+    //     ");
 
-        $stmt->execute([":id" => $id]);
+    //     $stmt->execute([":customer_id" => $customer_id]);
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
+
+
+    public function getCustomerRedeemedOffers($customer_id)
+{
+    $stmt = $this->conn->prepare("
+        SELECT o.title, o.description, o.discount_value, co.redeemed_at
+        FROM customer_offers co
+        JOIN offers o ON co.offer_id = o.offer_id
+        WHERE co.customer_id = :customer_id
+        ORDER BY co.redeemed_at DESC
+    ");
+
+    $stmt->execute([":customer_id" => $customer_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }

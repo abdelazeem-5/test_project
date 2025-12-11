@@ -13,20 +13,42 @@ class SubscriptionModel
     }
 
     // Create subscription (customer only - no merchant)
-    public function createSubscription(int $customer_id, string $tier = 'silver', string $program_type = 'points_based'): bool
-    {
-        $query = "INSERT INTO {$this->table} 
-                  (customer_id, tier, program_type) 
-                  VALUES (:customer_id, :tier, :program_type)";
+    // public function createSubscription(int $customer_id, string $tier = 'silver', string $program_type = 'points_based'): bool
+    // {
+    //     $query = "INSERT INTO {$this->table} 
+    //               (customer_id, tier, program_type) 
+    //               VALUES (:customer_id, :tier, :program_type)";
 
-        $stmt = $this->conn->prepare($query);
+    //     $stmt = $this->conn->prepare($query);
 
-        return $stmt->execute([
-            ":customer_id" => $customer_id,
-            ":tier"        => $tier,
-            ":program_type"=> $program_type
-        ]);
-    }
+    //     return $stmt->execute([
+    //         ":customer_id" => $customer_id,
+    //         ":tier"        => $tier,
+    //         ":program_type"=> $program_type
+    //     ]);
+    // }
+
+    public function createSubscription($customer_id, $tier = 'silver', $program_type = 'points_based')
+{
+    // 1️⃣ حذف أي اشتراك سابق لنفس العميل
+    $deleteQuery = "DELETE FROM {$this->table} WHERE customer_id = :customer_id";
+    $deleteStmt = $this->conn->prepare($deleteQuery);
+    $deleteStmt->execute([":customer_id" => $customer_id]);
+
+    // 2️⃣ إنشاء الاشتراك الجديد
+    $query = "INSERT INTO {$this->table} 
+            (customer_id, tier, program_type, status)
+            VALUES (:customer_id, :tier, :program_type, 'active')";
+
+    $stmt = $this->conn->prepare($query);
+
+    return $stmt->execute([
+        ":customer_id" => $customer_id,
+        ":tier" => $tier,
+        ":program_type" => $program_type
+    ]);
+}
+
 
     // Get subscriptions for a customer
     public function getSubscriptionsByCustomer(int $customer_id): array
@@ -89,4 +111,26 @@ class SubscriptionModel
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
+
+public function getSubscriptionByCustomerId($customerId)
+{
+    $query = "SELECT * FROM subscriptions 
+              WHERE customer_id = :customer_id 
+              LIMIT 1";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute([
+        ":customer_id" => $customerId
+    ]);
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+
+
+
+
 }

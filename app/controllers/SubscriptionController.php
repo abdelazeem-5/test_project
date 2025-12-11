@@ -102,4 +102,42 @@ class SubscriptionController
 
         echo $success ? "Tier Upgraded to Gold" : "Upgrade Failed";
     }
+
+
+    public function joinSubscription()
+{
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+        if (!isset($_SESSION['user'])) {
+            die("You must be logged in as a customer.");
+        }
+
+        $customerId = $_SESSION['user']['customer_id'];
+        $tier = $_POST['tier'];
+        $programType = $_POST['program_type'];
+
+        $model = new SubscriptionModel();
+
+        // 1️⃣ هل لديه اشتراك سابق؟
+        $existing = $model->getSubscriptionByCustomerId($customerId);
+
+        if ($existing) {
+            // 2️⃣ تحديث الاشتراك فقط
+            $model->updateSubscription($existing["subscription_id"], $tier, $programType);
+
+            header("Location: /Test_project/public/subscription/updated");
+            exit;
+        }
+
+        // 3️⃣ لو لم يكن مشترك → إنشاء اشتراك جديد
+        $model->createSubscription($customerId, $tier, $programType);
+
+        header("Location: /Test_project/public/subscription/created");
+        exit;
+    }
+
+    // GET → عرض صفحة الاشتراك
+    require ROOT_PATH . "/app/views/subscriptions/join.php";
+}
+
 }

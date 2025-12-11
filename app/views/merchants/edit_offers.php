@@ -12,6 +12,25 @@
             padding: 20px;
         }
 
+        /* 🔵 زر Merchant Panel أعلى الشمال */
+        .back-top-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #007bff;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.3s;
+            z-index: 999;
+        }
+        .back-top-btn:hover {
+            background: #0056b3;
+        }
+
         h2 {
             text-align: center;
             font-size: 28px;
@@ -80,7 +99,6 @@
             background: #0056b3;
         }
 
-        /* Offer list */
         .offer-list {
             width: 90%;
             max-width: 600px;
@@ -146,6 +164,9 @@
 
 <body>
 
+<!-- 🔵 زر Merchant Panel -->
+<a class="back-top-btn" href="/Test_project/public/merchant/dashboard">← Merchant Panel</a>
+
 <h2>Edit Offers</h2>
 
 <?php
@@ -170,11 +191,6 @@ if (isset($offer)):
     </form>
 
 <?php endif; ?>
-
-
-<!-- ========================= -->
-<!--     قائمة كل العروض       -->
-<!-- ========================= -->
 
 <?php if (empty($offers)): ?>
 

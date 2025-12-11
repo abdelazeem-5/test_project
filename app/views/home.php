@@ -3,180 +3,130 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once ROOT_PATH . "/app/models/OfferModel.php";
-$model = new OfferModel();
-$offers = $model->getAllOffers();
-
-// Check if logged in + role
 $isCustomer = isset($_SESSION['role']) && $_SESSION['role'] === "customer";
+$isMerchant = isset($_SESSION['role']) && $_SESSION['role'] === "merchant";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loyalty Program - Home</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loyalty Program - Home</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
+<style>
 
-        .header {
-            background: #007bff;
-            padding: 20px;
-            text-align: center;
-            color: white;
-        }
+    /* =======================
+       🔵 Background Animation
+    ======================== */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #0d47a1, #1565c0, #1e88e5, #42a5f5);
+        background-size: 400% 400%;
+        animation: backgroundMove 12s ease infinite;
+        color: white;
+    }
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            text-align: center;
-        }
+    @keyframes backgroundMove {
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
-        h1 {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
+    /* =======================
+       🔵 Hero Section
+    ======================== */
+    .hero {
+        text-align: center;
+        padding: 120px 20px 100px;
+    }
 
-        p {
-            font-size: 18px;
-            color: #444;
-        }
+    .hero h1 {
+        font-size: 54px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+        text-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
 
-        .buttons a {
-            text-decoration: none;
-            padding: 12px 25px;
-            margin: 10px;
-            background: #007bff;
-            color: white;
-            border-radius: 6px;
-            font-size: 18px;
-            display: inline-block;
-        }
+    .hero p {
+        font-size: 22px;
+        max-width: 650px;
+        margin: auto;
+        color: #e3f2fd;
+        line-height: 1.6;
+    }
 
-        .buttons a:hover {
-            background: #0056b3;
-        }
+    /* =======================
+       🔵 Buttons Section
+    ======================== */
+    .buttons {
+        margin-top: 35px;
+    }
 
-        .offers-section {
-            margin-top: 50px;
-        }
+    .btn {
+        display: inline-block;
+        padding: 14px 32px;
+        margin: 10px;
+        font-size: 20px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.15);
+        color: white;
+        backdrop-filter: blur(7px);
+        border: 1px solid rgba(255,255,255,0.25);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
 
-        .offers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
+    .btn:hover {
+        background: rgba(255,255,255,0.28);
+        transform: translateY(-3px);
+    }
 
-        .offer-card {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: left;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
+    /* Special colors */
+    .btn-login        { border-left: 4px solid #00e5ff; }
+    .btn-register     { border-left: 4px solid #69f0ae; }
+    .btn-subscribe    { border-left: 4px solid #ffd740; }
+    .btn-viewoffers   { border-left: 4px solid #ff5252; }
 
-        .offer-card h3 {
-            margin: 0 0 10px;
-            color: #007bff;
-        }
+    /* =======================
+       🔵 Footer
+    ======================== */
+    footer {
+        margin-top: 120px;
+        padding: 20px;
+        text-align: center;
+        background: rgba(0,0,0,0.25);
+        backdrop-filter: blur(7px);
+        color: #e3f2fd;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
 
-        .offer-card p {
-            margin: 5px 0;
-        }
-
-        .redeem-btn {
-            display: inline-block;
-            padding: 10px 18px;
-            background: #28a745;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            margin-top: 10px;
-        }
-
-        .redeem-btn:hover {
-            background: #1e7e34;
-        }
-
-        footer {
-            margin-top: 60px;
-            background: #222;
-            color: #ddd;
-            padding: 15px;
-            text-align: center;
-        }
-    </style>
+</style>
 </head>
 
 <body>
 
-<div class="header">
+<!-- Hero Section -->
+<div class="hero">
     <h1>Loyalty Program</h1>
-    <p>Earn points, redeem rewards, and enjoy exclusive merchant offers.</p>
-</div>
-
-<div class="container">
+    <p>Your gateway to earning points, redeeming exclusive rewards, and enjoying premium merchant offers.</p>
 
     <div class="buttons">
-        <a href="/Test_project/public/login">Login</a>
-        <a href="/Test_project/public/select-user-type">Register</a>
-        <a href="/Test_project/public/subscription/join">Subscriptions</a>
-        <a href="/Test_project/public/admins/login">Admins</a>
+        <a class="btn btn-login" href="/Test_project/public/login">Login</a>
+        <a class="btn btn-register" href="/Test_project/public/select-user-type">Register</a>
+        <a class="btn btn-subscribe" href="/Test_project/public/subscription/join">Subscriptions</a>
+        <a class="btn btn-viewoffers" href="/Test_project/public/offers">View Offers</a>
     </div>
-
-    <!-- Offers Section -->
-    <div class="offers-section">
-        <h2>🔥 Latest Offers</h2>
-
-        <?php if (empty($offers)): ?>
-            <p>No offers available yet.</p>
-        <?php else: ?>
-            <div class="offers-grid">
-                <?php foreach ($offers as $offer): ?>
-                    <div class="offer-card">
-                        <h3><?= htmlspecialchars($offer['title']) ?></h3>
-
-                        <p><?= nl2br(htmlspecialchars($offer['description'])) ?></p>
-
-                        <p><strong>Discount:</strong> <?= htmlspecialchars($offer['discount_value']) ?></p>
-
-
-                        <small><strong>Merchant ID:</strong> <?= $offer['merchant_id'] ?></small>
-
-                        <?php if ($isCustomer): ?>
-                            <!-- Customer logged in → redeem (Correct Route) -->
-                         
-                            <a class="redeem-btn" 
-                           href="/Test_project/public/customer/redeem-offer?id=<?= $offer['offer_id'] ?>">
-                            Use Offer
-                            </a>
-
-                        <?php else: ?>
-                            <!-- Not logged in → redirect to login -->
-                            <a class="redeem-btn" href="/Test_project/public/login">
-                                Use Offer
-                            </a>
-                        <?php endif; ?>
-
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-    </div>
-
 </div>
 
 <footer>
-    <!-- &copy; <?= date("Y") ?>  -->
-    Loyalty Program | All Rights Reserved
+    Loyalty Program  — maked  by Abdelazeem & Osama  
 </footer>
 
 </body>

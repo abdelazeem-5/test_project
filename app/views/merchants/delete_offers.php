@@ -12,6 +12,27 @@
             padding: 20px;
         }
 
+        /* ------------------------------
+           🔵 زر Merchant Panel (Top Left)
+        ------------------------------ */
+        .back-top-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #007bff;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.3s;
+            z-index: 999;
+        }
+        .back-top-btn:hover {
+            background: #0056b3;
+        }
+
         h2 {
             text-align: center;
             font-size: 28px;
@@ -30,7 +51,7 @@
             padding: 18px;
             border-radius: 12px;
             margin-bottom: 20px;
-            border-left: 6px solid #dc3545; /* لون أحمر يدل على الحذف */
+            border-left: 6px solid #dc3545;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: 0.3s;
         }
@@ -82,6 +103,9 @@
 
 </head>
 <body>
+
+<!-- 🔵 زر Merchant Panel -->
+<a class="back-top-btn" href="/Test_project/public/merchant/dashboard">← Merchant Panel</a>
 
 <h2>Delete Offers</h2>
 

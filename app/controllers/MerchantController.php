@@ -160,4 +160,101 @@ class MerchantController
 
         echo $success ? "Offer Deleted Successfully!" : "Failed to delete offer!";
     }
+
+
+//     public function profile()
+// {
+//     if (!isset($_SESSION['user']) || ($_SESSION['role'] ?? null) !== 'merchant') {
+//         header("Location: /Test_project/public/login");
+//         exit;
+//     }
+
+//     $merchant = $_SESSION['user'];
+
+//     $userModel = new UserModel("merchant");
+
+//     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+//         $name     = $_POST['name'] ?? '';
+//         $email    = $_POST['email'] ?? '';
+//         $password = $_POST['password'] ?? '';
+
+//         if (!$name || !$email) {
+//             $error = "Name and email are required.";
+//             require ROOT_PATH . "/app/views/merchants/profile.php";
+//             return;
+//         }
+
+//         $passwordToSave = $password !== '' ? $password : null;
+
+//         $updated = $userModel->updateMerchant(
+//             (int)$merchant['merchant_id'],
+//             $name,
+//             $email,
+//             $passwordToSave
+//         );
+
+//         if ($updated) {
+//             // حدّث السيشن
+//             $_SESSION['user']['name']  = $name;
+//             $_SESSION['user']['email'] = $email;
+//             $success = "Profile updated successfully.";
+//         } else {
+//             $error = "Failed to update profile.";
+//         }
+
+//         require ROOT_PATH . "/app/views/merchants/profile.php";
+//         return;
+//     }
+
+//     // GET → عرض النموذج
+//     require ROOT_PATH . "/app/views/merchants/profile.php";
+// }
+
+
+public function profile()
+{
+    if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'merchant') {
+        header("Location: /Test_project/public/login");
+        exit;
+    }
+
+    $merchant = $_SESSION['user'];
+    $model = new MerchantModel();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name     = $_POST['name'];
+        $email    = $_POST['email'];
+        $password = $_POST['password'] ?? null;
+
+        $model->updateMerchant($merchant['merchant_id'], $name, $email, $password);
+
+        $_SESSION['user']['name']  = $name;
+        $_SESSION['user']['email'] = $email;
+
+        header("Location: /Test_project/public/merchant/profile");
+        exit;
+    }
+
+    require ROOT_PATH . "/app/views/merchants/profile.php";
+}
+
+
+public function myOffers()
+{
+    if (!isset($_SESSION['user']) || ($_SESSION['role'] ?? null) !== 'merchant') {
+        header("Location: /Test_project/public/login");
+        exit;
+    }
+
+    require_once ROOT_PATH . "/app/models/OfferModel.php";
+    $model = new OfferModel();
+
+    $merchantId = (int)$_SESSION['user']['merchant_id'];
+
+    $offers = $model->getOffersByMerchant($merchantId);
+
+    require ROOT_PATH . "/app/views/merchants/my_offers.php";
+}
+
 }

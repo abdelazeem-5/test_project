@@ -63,4 +63,64 @@ class UserModel
             return false;
         }
     }
+public function updateCustomer(int $customerId, string $name, string $email, ?string $password = null): bool
+{
+    // نتأكد أننا شغالين على جدول customers
+    if ($this->table !== 'customers') {
+        throw new Exception("updateCustomer can only be used with customers table.");
+    }
+
+    $fields = [
+        "name = :name",
+        "email = :email"
+    ];
+
+    $params = [
+        ":id"   => $customerId,
+        ":name" => htmlspecialchars($name),
+        ":email"=> htmlspecialchars($email)
+    ];
+
+    if ($password !== null && $password !== '') {
+        $fields[]              = "password_hash = :password_hash";
+        $params[":password_hash"] = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    $sql = "UPDATE {$this->table} SET " . implode(", ", $fields) . " WHERE customer_id = :id";
+
+    $stmt = $this->conn->prepare($sql);
+    return $stmt->execute($params);
+}
+
+
+public function updateMerchant(int $merchantId, string $name, string $email, ?string $password = null): bool
+{
+    // نتأكد أننا شغالين على جدول merchants
+    if ($this->table !== 'merchants') {
+        throw new Exception("updateMerchant can only be used with merchants table.");
+    }
+
+    $fields = [
+        "name = :name",
+        "email = :email"
+    ];
+
+    $params = [
+        ":id"   => $merchantId,
+        ":name" => htmlspecialchars($name),
+        ":email"=> htmlspecialchars($email)
+    ];
+
+    if ($password !== null && $password !== '') {
+        $fields[]                 = "password_hash = :password_hash";
+        $params[":password_hash"] = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    $sql = "UPDATE {$this->table} SET " . implode(", ", $fields) . " WHERE merchant_id = :id";
+
+    $stmt = $this->conn->prepare($sql);
+    return $stmt->execute($params);
+}
+
+    
 }

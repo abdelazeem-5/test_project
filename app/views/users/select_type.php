@@ -5,70 +5,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select User Type</title>
 
-    <style>
-        /* ====== FORM CONTAINER ====== */
-        form {
-            width: 320px;
-            margin: 40px auto;
-            padding: 20px 25px;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            font-family: Arial, sans-serif;
-        }
+<style>
 
-        /* ====== HEADER ====== */
-        h2 {
-            text-align: center;
-            font-size: 22px;
-            margin-bottom: 20px;
-            color: #333;
-        }
+/* -----------------------------------
+   BACK BUTTON (TOP LEFT)
+------------------------------------ */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
 
-        /* ====== RADIO LABELS ====== */
-        label {
-            font-size: 18px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            border-radius: 8px;
-            transition: 0.3s;
-            border: 1px solid #ddd;
-        }
+    background: rgba(255,255,255,0.18);
+    padding: 10px 18px;
+    border-radius: 10px;
 
-        label:hover {
-            background: #f5f5f5;
-        }
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
 
-        /* ====== HIGHLIGHT SELECTED ====== */
-        .selected {
-            background: #e8f0ff !important;
-            border-color: #007bff !important;
-        }
+    border: 1px solid rgba(255,255,255,0.35);
+    backdrop-filter: blur(6px);
 
-        /* ====== BUTTON ====== */
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            font-size: 18px;
-            background: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    transition: 0.25s;
+}
 
-        button:hover {
-            background: #0056b3;
-        }
-    </style>
+.back-btn:hover {
+    background: rgba(255,255,255,0.28);
+    transform: translateY(-3px);
+}
+
+
+/* -----------------------------------
+   GLOBAL GRADIENT BACKGROUND
+------------------------------------ */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
+    background-size: 400% 400%;
+    animation: gradientFlow 12s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* -----------------------------------
+   PAGE TITLE
+------------------------------------ */
+h2 {
+    text-align: center;
+    font-size: 32px;
+    color: white;
+    margin-bottom: 15px;
+    margin-top: -10px;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    font-weight: 700;
+}
+
+/* -----------------------------------
+   CARD CONTAINER
+------------------------------------ */
+form {
+    width: 380px;
+    padding: 28px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+
+    box-shadow:
+        0 12px 25px rgba(0,0,0,0.20),
+        0 5px 12px rgba(0,0,0,0.08);
+
+    backdrop-filter: blur(4px);
+    animation: fadeInUp 0.75s ease;
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(35px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* -----------------------------------
+   RADIO LABELS (OPTION BOXES)
+------------------------------------ */
+label {
+    font-size: 18px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px;
+    border-radius: 14px;
+
+    border: 2px solid #cfd8dc;
+    background: #f7f9fc;
+
+    transition: 0.25s ease;
+    margin-bottom: 18px;
+}
+
+label:hover {
+    transform: translateY(-3px);
+    background: #eef5ff;
+    border-color: #64b5f6;
+}
+
+.selected {
+    background: #e3f2fd !important;
+    border-color: #1e88e5 !important;
+    box-shadow: 0 4px 12px rgba(30,136,229,0.35);
+}
+
+/* Radio input hidden */
+label input[type="radio"] {
+    transform: scale(1.4);
+}
+
+/* -----------------------------------
+   CONTINUE BUTTON
+------------------------------------ */
+button {
+    width: 100%;
+    padding: 15px;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    background: linear-gradient(90deg, #1565c0, #1e88e5);
+    color: white;
+
+    border: none;
+    border-radius: 12px;
+
+    cursor: pointer;
+    transition: 0.25s ease-in-out;
+
+    box-shadow: 0 6px 14px rgba(21,101,192,0.35);
+}
+
+button:hover {
+    background: linear-gradient(90deg, #1e88e5, #42a5f5);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 22px rgba(21,101,192,0.45);
+}
+
+</style>
 
 </head>
 <body>
+
+<!-- 🔵 BACK BUTTON -->
+<a class="back-btn" href="/Test_project/public/">← Back to Home</a>
 
 <h2>Select User Type</h2>
 
@@ -78,20 +179,17 @@
         <input type="radio" name="user_type" value="customer" checked>
         <span>Customer</span>
     </label>
-    <br><br>
 
     <label>
         <input type="radio" name="user_type" value="merchant">
         <span>Merchant</span>
     </label>
-    <br><br>
 
     <button type="submit">Continue</button>
 
 </form>
 
 <script>
-    // تأثير تحديد الخيار المختار
     const labels = document.querySelectorAll("label");
     const radios = document.querySelectorAll("input[type='radio']");
 
@@ -102,7 +200,6 @@
         });
     });
 
-    // تشغيل أول خيار تلقائياً
     labels[0].classList.add("selected");
 </script>
 
