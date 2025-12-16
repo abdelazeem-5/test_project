@@ -142,4 +142,40 @@ public function deleteMerchant($id)
 
 
     
+
+
+
+
+public function getCustomerPoints(int $customerId): int
+{
+    $stmt = $this->conn->prepare(
+        "SELECT points FROM customers WHERE customer_id = ?"
+    );
+    $stmt->execute([$customerId]);
+    $row = $stmt->fetch();
+
+    return $row ? (int)$row['points'] : 0;
+}
+
+
+
+public function addPoints(int $customerId, int $points): bool
+{
+    // نتأكد إننا شغالين على customers
+    if ($this->table !== 'customers') {
+        throw new Exception("addPoints can only be used with customers table.");
+    }
+
+    $stmt = $this->conn->prepare(
+        "UPDATE customers 
+         SET points = points + :points 
+         WHERE customer_id = :id"
+    );
+
+    return $stmt->execute([
+        ":points" => $points,
+        ":id"     => $customerId
+    ]);
+}
+
 }

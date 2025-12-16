@@ -21,31 +21,6 @@ class MerchantController
         require ROOT_PATH . "/app/views/merchants/dashboard.php";
     }
 
-    public function purchase()
-    {
-        if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'merchant') {
-            echo "Not authorized!";
-            return;
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            $email = $_POST['customer_email'];
-            $amount = (float)$_POST['amount'];
-
-            $model = new MerchantModel();
-            $points = $model->calculatePoints($amount);
-
-            $success = $model->addPoints($email, $points);
-
-            echo $success 
-                ? "Purchase recorded. Added $points points automatically!"
-                : "Failed to add points. Customer not found.";
-
-        } else {
-            require ROOT_PATH . "/app/views/merchants/purchase.php";
-        }
-    }
 
     public function offers()
     {
@@ -171,14 +146,22 @@ public function profile()
     }
 
     $merchant = $_SESSION['user'];
-    $model = new MerchantModel();
+
+    require_once ROOT_PATH . "/app/models/UserModel.php";
+    $model = new UserModel("merchant");
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
         $name     = $_POST['name'];
         $email    = $_POST['email'];
         $password = $_POST['password'] ?? null;
 
-        $model->updateMerchant($merchant['merchant_id'], $name, $email, $password);
+        $model->updateMerchant(
+            $merchant['merchant_id'],
+            $name,
+            $email,
+            $password
+        );
 
         $_SESSION['user']['name']  = $name;
         $_SESSION['user']['email'] = $email;

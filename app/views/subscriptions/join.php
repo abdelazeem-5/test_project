@@ -7,9 +7,6 @@
 
 <style>
 
-    /* ================================
-       GLOBAL BACKGROUND (LIKE LOGIN)
-    ================================= */
     body {
         font-family: "Segoe UI", Arial, sans-serif;
         margin: 0;
@@ -28,12 +25,7 @@
         overflow: hidden;
     }
 
-    @keyframes moveBG {
-        0%   { background-position: 0% 50%; }
-        50%  { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
+  
     body::before {
         content: "";
         position: absolute;

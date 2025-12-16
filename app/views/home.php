@@ -2,131 +2,186 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
-$isCustomer = isset($_SESSION['role']) && $_SESSION['role'] === "customer";
-$isMerchant = isset($_SESSION['role']) && $_SESSION['role'] === "merchant";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loyalty Program - Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="/Test_project/public/css/stylee.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    /* =======================
-       🔵 Background Animation
-    ======================== */
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
-        background: linear-gradient(135deg, #0d47a1, #1565c0, #1e88e5, #42a5f5);
-        background-size: 400% 400%;
-        animation: backgroundMove 12s ease infinite;
-        color: white;
-    }
-
-    @keyframes backgroundMove {
-        0%   { background-position: 0% 50%; }
-        50%  { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* =======================
-       🔵 Hero Section
-    ======================== */
-    .hero {
-        text-align: center;
-        padding: 120px 20px 100px;
-    }
-
-    .hero h1 {
-        font-size: 54px;
-        font-weight: 800;
-        letter-spacing: 1px;
-        margin-bottom: 15px;
-        text-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    }
-
-    .hero p {
-        font-size: 22px;
-        max-width: 650px;
-        margin: auto;
-        color: #e3f2fd;
-        line-height: 1.6;
-    }
-
-    /* =======================
-       🔵 Buttons Section
-    ======================== */
-    .buttons {
-        margin-top: 35px;
-    }
-
-    .btn {
-        display: inline-block;
-        padding: 14px 32px;
-        margin: 10px;
-        font-size: 20px;
-        font-weight: 600;
-        text-decoration: none;
-        border-radius: 10px;
-        background: rgba(255,255,255,0.15);
-        color: white;
-        backdrop-filter: blur(7px);
-        border: 1px solid rgba(255,255,255,0.25);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        transition: 0.3s;
-    }
-
-    .btn:hover {
-        background: rgba(255,255,255,0.28);
-        transform: translateY(-3px);
-    }
-
-    /* Special colors */
-    .btn-login        { border-left: 4px solid #00e5ff; }
-    .btn-register     { border-left: 4px solid #69f0ae; }
-    .btn-subscribe    { border-left: 4px solid #ffd740; }
-    .btn-viewoffers   { border-left: 4px solid #ff5252; }
-
-    /* =======================
-       🔵 Footer
-    ======================== */
-    footer {
-        margin-top: 120px;
-        padding: 20px;
-        text-align: center;
-        background: rgba(0,0,0,0.25);
-        backdrop-filter: blur(7px);
-        color: #e3f2fd;
-        font-size: 16px;
-        letter-spacing: 0.5px;
-    }
-
-</style>
+  <title>Loyalty Program</title>
 </head>
 
 <body>
 
-<!-- Hero Section -->
-<div class="hero">
-    <h1>Loyalty Program</h1>
-    <p>Your gateway to earning points, redeeming exclusive rewards, and enjoying premium merchant offers.</p>
-
-    <div class="buttons">
-        <a class="btn btn-login" href="/Test_project/public/login">Login</a>
-        <a class="btn btn-register" href="/Test_project/public/select-user-type">Register</a>
-        <a class="btn btn-subscribe" href="/Test_project/public/subscription/join">Subscriptions</a>
-        <a class="btn btn-viewoffers" href="/Test_project/public/offers">View Offers</a>
+<header>
+  <div class="header-container">
+    <div class="header-col">
+      <div class="logo-container">
+        <a href="/Test_project/public/">
+          <img src="/Test_project/public/images/logoo2.jpeg" alt="logo" class="logo">
+        </a>
+      </div>
     </div>
-</div>
 
-<footer>
-    Loyalty Program  — maked  by Abdelazeem & Osama  
+    <div class="header-col">
+      <nav class="nav-container">
+          <ul class="nav-list-container">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="/Test_project/public/customer/points">EarnPoints</a></li>
+            <li><a href="/Test_project/public/customer/redeemed-offers">Redeem</a></li>
+            <li><a href="/Test_project/public/offers">Offers</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+
+
+      </nav>
+    </div>
+
+    <div class="header-col">
+      <ul class="button">
+        <li>
+          <a href="/Test_project/public/login" class="btn">Login</a>
+        </li>
+        <li>
+          <a href="/Test_project/public/select-user-type" class="btn">Register</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+  <section id="home" class="hero">
+  <div class="hero-content">
+    <h1>Earn Rewards Every Time You Shop</h1>
+    <p>
+      Join our loyalty program and earn points with every purchase.
+      Redeem your points for exclusive rewards and special offers.
+    </p>
+  </div>
+</section>
+
+<section id="about" class="about-section">
+
+  <div class="container">
+    <h2 class="section-title">About Loyalty</h2>
+    <p class="section-desc">
+      Loyalty is a platform for managing loyalty programs that serve both users and merchants.
+      It offers a variety of programs to fit different needs.
+    </p>
+
+    <div class="cards">
+      <div class="card card-tiered">
+        <div class="icon">⭐</div>
+        <h3>Tiered Programs</h3>
+        <p>Benefits are divided into levels (Silver, Gold, Platinum).</p>
+      </div>
+
+      <div class="card card-subscription">
+        <div class="icon">💳</div>
+        <h3>Subscription-Based</h3>
+        <p>Customers pay a monthly or yearly subscription.</p>
+      </div>
+
+      <div class="card card-value">
+        <div class="icon">🌿</div>
+        <h3>Value-Based</h3>
+        <p>Programs focused on shared values.</p>
+      </div>
+
+      <div class="card card-points">
+        <div class="icon">🎁</div>
+        <h3>Points-Based</h3>
+        <p>Earn points and redeem rewards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="categories">
+  <div class="container">
+    <h2 class="section-title">Supported Categories</h2>
+
+    <div class="category-grid">
+      <div class="category-card">
+        <img src="/Test_project/public/images/mall.jpeg" alt="Shopping Malls">
+        <h3>Shopping Malls</h3>
+      </div>
+
+      <div class="category-card">
+        <img src="/Test_project/public/images/restaurant.jpeg" alt="Restaurants">
+        <h3>Restaurants</h3>
+      </div>
+
+      <div class="category-card">
+        <img src="/Test_project/public/images/cinema.jpeg" alt="Cinemas">
+        <h3>Cinemas</h3>
+      </div>
+
+      <div class="category-card">
+        <img src="/Test_project/public/images/Entertainment.jpeg" alt="Entertainment">
+        <h3>Entertainment</h3>
+      </div>
+
+      <div class="category-card">
+        <img src="/Test_project/public/images/hotel.jpeg" alt="Hotels">
+        <h3>Hotels</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="users">
+  <div class="container users-grid">
+    <div class="user-box">
+      <div class="icon">
+        <i class="fas fa-user fa-3x" style="color:#fbbf24;"></i>
+      </div>
+      <h3>For Users</h3>
+      <p>Track points and enjoy exclusive rewards.</p>
+    </div>
+
+    <div class="user-box">
+      <div class="icon">
+        <i class="fas fa-store fa-3x" style="color:#fbbf24;"></i>
+      </div>
+      <h3>For Merchants</h3>
+      <p>Create programs and engage customers.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" id="contact">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Loyalty Web App</h3>
+      <p>Connecting customers with rewards and offers.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/Test_project/public/">Home</a></li>
+        <li><a href="/Test_project/public/offers">Offers</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <p>Email: support@loyaltyapp.com</p>
+      <p>Phone: +20 123 456 7890</p>
+    </div>
+  </div>
+
+  <p class="footer-bottom">
+    Loyalty Web App. All Rights Reserved.
+  </p>
 </footer>
 
 </body>

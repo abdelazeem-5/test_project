@@ -18,7 +18,6 @@ class UserController
     ========================== */
     public function selectUserType()
     {
-        // لو جاية POST → اختار وودّي على صفحة التسجيل المناسبة
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $type = $_POST["user_type"] ?? "customer";
@@ -31,11 +30,9 @@ class UserController
             exit;
         }
 
-        // GET → اعرض صفحة اختيار النوع
         require ROOT_PATH . "/app/views/users/select_type.php";
     }
 
-    // لو الرواتر بيستدعي handleUserType خليه يستخدم نفس المنطق
     public function handleUserType()
     {
         $this->selectUserType();
@@ -63,7 +60,9 @@ class UserController
 
             if ($ok) {
                 // بعد التسجيل وديه صفحة اللوجين
-                header("Location: /Test_project/public/login");
+                // header("Location: /Test_project/public/login");
+                   header("Location: /Test_project/public/offers");
+
                 exit;
             } else {
                 $error = "Customer registration failed (email may already exist).";
@@ -204,16 +203,16 @@ class UserController
         $extra = 0;
         if ($subscription) {
             switch ($subscription["tier"]) {
-                case "silver":   $extra = 20; break;
-                case "gold":     $extra = 30; break;
-                case "platinum": $extra = 40; break;
+                case "silver":   $extra = 10; break;
+                case "gold":     $extra = 20; break;
+                case "platinum": $extra = 30; break;
             }
         }
 
         $merchantDiscount = floatval($offer["discount_value"]);
-        $finalDiscount    = $merchantDiscount + $extra;
+        $finalDiscount    = $merchantDiscount + $extra; // خصم التاجر + خصم الاشتراك
 
-        $offer["final_discount"] = $finalDiscount;
+        $offer["final_discount"] = $finalDiscount;  // خصم التاجر + خصم الاشتراك = finalDiscount
 
         require ROOT_PATH . "/app/views/users/receipt.php";
     }
@@ -222,31 +221,41 @@ class UserController
        CONFIRM REDEEM (SAVE TO DB)
     ========================== */
     public function confirmRedeem()
-    {
-        if (!isset($_SESSION["user"]) || $_SESSION["role"] !== "customer") {
-            header("Location: /Test_project/public/login");
-            exit;
-        }
-
-        if ($_SERVER["REQUEST_METHOD"] !== "POST" || !isset($_POST["offer_id"])) {
-            die("Invalid access");
-        }
-
-        $offerId    = (int)$_POST["offer_id"];
-        $customerId = (int)$_SESSION["user"]["customer_id"];
-
-        $offerModel = new OfferModel();
-        $saved      = $offerModel->logRedeem($customerId, $offerId);
-
-        if ($saved) {
-            $_SESSION["redeem_success"] = "Offer saved successfully!";
-        } else {
-            $_SESSION["redeem_error"] = "Failed to save offer.";
-        }
-
-        header("Location: /Test_project/public/customer/redeem-offer?id=" . $offerId);
+{
+    if (!isset($_SESSION["user"]) || $_SESSION["role"] !== "customer") {
+        header("Location: /Test_project/public/login");
         exit;
     }
+
+    if ($_SERVER["REQUEST_METHOD"] !== "POST" || !isset($_POST["offer_id"])) {
+        die("Invalid access");
+    }
+
+    $offerId    = (int)$_POST["offer_id"];
+    $customerId = (int)$_SESSION["user"]["customer_id"];
+
+    $offerModel = new OfferModel();
+
+    // 1️⃣ تنفيذ عملية الـ Redeem (مرة واحدة)
+    $saved = $offerModel->logRedeem($customerId, $offerId);
+
+    if ($saved) {
+
+        // 2️⃣ إضافة النقاط (مرة واحدة فقط)
+        $userModel = new UserModel("customer");
+        $userModel->addPoints($customerId, 10); // ← 10 نقاط لكل عملية
+
+        $_SESSION["redeem_success"] = "Offer saved successfully!";
+
+    } else {
+        $_SESSION["redeem_error"] = "Failed to save offer.";
+    }
+
+    // 3️⃣ Redirect (عشان مفيش تكرار مع Refresh)
+    header("Location: /Test_project/public/customer/redeem-offer?id=" . $offerId);
+    exit;
+}
+
 
     /* =========================
        CUSTOMER DASHBOARD
@@ -262,7 +271,7 @@ class UserController
     }
 
     /* =========================
-       VIEW REDEEMED OFFERS
+       VIEW  My REDEEMED OFFERS
     ========================== */
     public function redeemedOffers()
     {
@@ -338,4 +347,25 @@ class UserController
 
         require ROOT_PATH . "/app/views/users/customer_profile.php";
     }
+
+
+
+ public function customerPoints()
+{
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'customer') {
+        header("Location: /Test_project/public/login");
+        exit;
+    }
+
+    $customerId = $_SESSION['user']['customer_id'];
+
+    $userModel = new UserModel("customer");
+    $points = $userModel->getCustomerPoints($customerId);
+
+    require ROOT_PATH . "/app/views/users/points.php";
+}
+
+
+
+
 }

@@ -150,7 +150,7 @@ class OfferModel
     }
 
 
-
+ // لجلب العروض اللي العميل استعملها مع وقت الاستعمال
     public function getCustomerRedeemedOffers($customer_id)
 {
     $stmt = $this->conn->prepare("

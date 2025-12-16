@@ -10,6 +10,7 @@ class Router
         $this->routes[$path] = $handler;
     }
 
+    // بتشوف المسار موجود ولا لأ
     public function dispatch(string $path)
     {
         if (array_key_exists($path, $this->routes)) {

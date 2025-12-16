@@ -15,8 +15,8 @@ class MerchantModel
     // حساب النقاط تلقائياً
     public function calculatePoints($amount)
     {
-        // مثال: كل 1 جنيه = 1 نقطة
-        return intval($amount * 1);
+        // مثال: كل 1 جنيه = 5 نقاط
+        return intval($amount * 5);
     }
 
     // إضافة النقاط للعميل
