@@ -12,9 +12,7 @@ class OfferModel
         $this->conn = $db->connect();
     }
 
-    // =====================================================
-    // CREATE OFFER
-    // =====================================================
+
     public function createOffer($merchant_id, $title, $description, $discount)
     {
         $stmt = $this->conn->prepare("
@@ -30,9 +28,7 @@ class OfferModel
         ]);
     }
 
-    // =====================================================
-    // GET ALL OFFERS
-    // =====================================================
+
     public function getAllOffers()
     {
         $stmt = $this->conn->prepare("
@@ -43,9 +39,7 @@ class OfferModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // =====================================================
-    // GET OFFERS BY MERCHANT
-    // =====================================================
+
     public function getOffersByMerchant(int $merchant_id): array
     {
         $stmt = $this->conn->prepare("
@@ -59,9 +53,7 @@ class OfferModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // =====================================================
-    // UPDATE OFFER
-    // =====================================================
+
     public function updateOffer(int $offer_id, string $title, string $description, string $discount): bool
     {
         $stmt = $this->conn->prepare("
@@ -80,9 +72,7 @@ class OfferModel
         ]);
     }
 
-    // =====================================================
-    // DELETE OFFER
-    // =====================================================
+
     public function deleteOffer(int $offer_id): bool
     {
         $stmt = $this->conn->prepare("
@@ -93,9 +83,7 @@ class OfferModel
         return $stmt->execute([":id" => $offer_id]);
     }
 
-    // =====================================================
-    // GET OFFER BY ID
-    // =====================================================
+
     public function getOfferById($id)
     {
         $stmt = $this->conn->prepare("
@@ -109,9 +97,6 @@ class OfferModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // =====================================================
-    // CHECK IF CUSTOMER ALREADY REDEEMED THIS OFFER
-    // =====================================================
     public function isOfferRedeemed($customer_id, $offer_id)
     {
         $stmt = $this->conn->prepare("
@@ -128,12 +113,8 @@ class OfferModel
         return $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
     }
 
-    // =====================================================
-    // LOG REDEEM (USE OFFER ONCE ONLY)
-    // =====================================================
     public function logRedeem($customer_id, $offer_id)
     {
-        // ❌ لو العميل استخدم العرض قبل كده → نمنع التكرار
         if ($this->isOfferRedeemed($customer_id, $offer_id)) {
             return false;
         }
@@ -150,7 +131,6 @@ class OfferModel
     }
 
 
- // لجلب العروض اللي العميل استعملها مع وقت الاستعمال
     public function getCustomerRedeemedOffers($customer_id)
 {
     $stmt = $this->conn->prepare("
@@ -164,5 +144,19 @@ class OfferModel
     $stmt->execute([":customer_id" => $customer_id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+
+
+
+
+public function deleteByMerchant(int $merchantId): bool
+{
+    $stmt = $this->conn->prepare(
+        "DELETE FROM offers WHERE merchant_id = :id"
+    );
+
+    return $stmt->execute([":id" => $merchantId]);
+}
+
 
 }

@@ -12,26 +12,22 @@ class MerchantModel
         $this->conn = $db->connect();
     }
 
-    // حساب النقاط تلقائياً
     public function calculatePoints($amount)
     {
-        // مثال: كل 1 جنيه = 5 نقاط
         return intval($amount * 5);
     }
 
-    // إضافة النقاط للعميل
     public function addPoints($email, $points)
     {
-        $query = "
-            UPDATE customers
+        $query = "UPDATE customers
             SET points = points + :points
-            WHERE email = :email
-        ";
+            WHERE email = :email";
         $stmt = $this->conn->prepare($query);
 
         return $stmt->execute([
-            ":points" => $points,
-            ":email" => $email
+            "points" => $points,
+            "email" => $email
         ]);
     }
 }
+

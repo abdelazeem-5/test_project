@@ -12,7 +12,6 @@
             padding: 20px;
         }
 
-        /* 🔵 زر Merchant Panel أعلى الشمال */
         .back-top-btn {
             position: absolute;
             top: 20px;
@@ -44,7 +43,6 @@
             font-size: 22px;
         }
 
-        /* Edit Form */
         form {
             width: 90%;
             max-width: 450px;
@@ -164,13 +162,11 @@
 
 <body>
 
-<!-- 🔵 زر Merchant Panel -->
 <a class="back-top-btn" href="/Test_project/public/merchant/dashboard">← Merchant Panel</a>
 
 <h2>Edit Offers</h2>
 
 <?php
-// إذا كان يوجد $offer → نحن داخل صفحة تعديل عرض واحد
 if (isset($offer)):
 ?>
 

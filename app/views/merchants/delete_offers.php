@@ -12,9 +12,7 @@
             padding: 20px;
         }
 
-        /* ------------------------------
-           🔵 زر Merchant Panel (Top Left)
-        ------------------------------ */
+ 
         .back-top-btn {
             position: absolute;
             top: 20px;
@@ -104,7 +102,6 @@
 </head>
 <body>
 
-<!-- 🔵 زر Merchant Panel -->
 <a class="back-top-btn" href="/Test_project/public/merchant/dashboard">← Merchant Panel</a>
 
 <h2>Delete Offers</h2>

@@ -7,7 +7,6 @@
 
 <style>
 
-    /* ===== زر Merchant Panel أعلى الشمال ===== */
     .back-top-btn {
         position: absolute;
         top: 20px;
@@ -26,7 +25,6 @@
         background: #0056b3;
     }
 
-    /* ===== خلفية محترفة مثل صفحة اللوجين ===== */
     body {
         margin: 0;
         padding: 0;
@@ -47,7 +45,6 @@
         to   { background-position: right; }
     }
 
-    /* ===== صندوق إضافة العرض (نفس شكل البروفايل) ===== */
     .offer-box {
         width: 90%;
         max-width: 400px;
@@ -61,10 +58,7 @@
         animation: fadeIn 0.7s ease;
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(30px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
+
 
     h2 {
         text-align: center;
@@ -136,7 +130,6 @@
 
 <body>
 
-<!-- 🔵 زر Merchant Panel -->
 <a class="back-top-btn" href="/Test_project/public/merchant/dashboard">← Merchant Panel</a>
 
 <div class="offer-box">

@@ -23,10 +23,9 @@ $merchant = $_SESSION["user"];
         font-family: Arial, sans-serif;
     }
 
-    /* Sidebar */
     .sidebar {
         height: 100vh;
-        background: #0d1b2a; /* الأزرق الداكن */
+        background: #0d1b2a; 
         color: white;
         padding: 20px;
     }
@@ -42,7 +41,7 @@ $merchant = $_SESSION["user"];
 
     .sidebar a:hover {
         color: #ffffff;
-        background: #007bff; /* اللون الأزرق الموحد */
+        background: #007bff; 
         padding-left: 12px;
         border-radius: 6px;
     }
@@ -62,7 +61,7 @@ $merchant = $_SESSION["user"];
         background: white;
         box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         margin-bottom: 20px;
-        border-left: 6px solid #007bff; /* نفس ستايل الكروت في كل الداشبورد */
+        border-left: 6px solid #007bff; 
         transition: 0.3s;
     }
 
@@ -78,7 +77,6 @@ $merchant = $_SESSION["user"];
 
 <div class="row g-0">
 
-    <!-- Sidebar -->
     <div class="col-3 sidebar">
         <h3>Merchant Panel</h3>
         <hr style="border-color:#cfd9e6">
@@ -95,7 +93,6 @@ $merchant = $_SESSION["user"];
         </a>
     </div>
 
-    <!-- Content -->
     <div class="col-9 content">
         <h2>Welcome, <?= htmlspecialchars($merchant['name']) ?>!</h2>
 

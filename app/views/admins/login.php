@@ -7,9 +7,7 @@
 
 <style>
 
-/* -----------------------------------
-   GLOBAL ANIMATED BACKGROUND
------------------------------------- */
+
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
@@ -27,15 +25,9 @@ body {
     position: relative;
 }
 
-@keyframes bgFlow {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 
-/* -----------------------------------
-   BACK BUTTON (Top Left)
------------------------------------- */
+
+
 .back-btn {
     position: absolute;
     top: 20px;
@@ -61,9 +53,6 @@ body {
     transform: translateY(-3px);
 }
 
-/* -----------------------------------
-   PAGE TITLE
------------------------------------- */
 h2 {
     color: white;
     text-align: center;
@@ -73,9 +62,6 @@ h2 {
     text-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-/* -----------------------------------
-   LOGIN CARD (Glassmorphism)
------------------------------------- */
 form {
     width: 350px;
     padding: 28px;
@@ -90,14 +76,9 @@ form {
     animation: fadeUp 0.7s ease;
 }
 
-@keyframes fadeUp {
-    0%   { opacity: 0; transform: translateY(35px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
 
-/* -----------------------------------
-   INPUTS
------------------------------------- */
+
+
 input {
     width: 100%;
     padding: 14px;
@@ -119,9 +100,7 @@ input:focus {
     outline: none;
 }
 
-/* -----------------------------------
-   LOGIN BUTTON
------------------------------------- */
+
 button {
     width: 100%;
     padding: 14px;
@@ -160,7 +139,6 @@ input, textarea, select, button {
 
 <body>
 
-<!-- 🔵 BACK BUTTON -->
 <a href="/Test_project/public/" class="back-btn">← Back to Home</a>
 
 <div>
@@ -175,7 +153,6 @@ input, textarea, select, button {
 </div>
 
 <script>
-    // Input focus animation
     document.querySelectorAll("input").forEach(input => {
         input.addEventListener("focus", () => input.classList.add("focused"));
         input.addEventListener("blur", () => input.classList.remove("focused"));

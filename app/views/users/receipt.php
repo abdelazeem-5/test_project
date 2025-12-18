@@ -11,9 +11,7 @@
 
 <style>
 
-/* ================================
-   GLOBAL BACKGROUND
-================================ */
+
 body { 
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
@@ -27,15 +25,7 @@ body {
     min-height: 100vh;
 }
 
-@keyframes flowBG {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 
-/* ================================
-   BACK BUTTON
-================================ */
 .back-btn {
     display: inline-block;
     background: rgba(255,255,255,0.20);
@@ -60,9 +50,6 @@ body {
     transform: translateY(-3px);
 }
 
-/* ================================
-   RECEIPT CARD
-================================ */
 .receipt {
     width: 90%;
     max-width: 420px;
@@ -80,10 +67,7 @@ body {
     animation: fadeUp 0.7s ease;
 }
 
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
+
 
 h2 {
     color: #0d47a1;
@@ -92,9 +76,7 @@ h2 {
     font-weight: 700;
 }
 
-/* ================================
-   CONFIRM BUTTON
-================================ */
+
 .btn-confirm {
     width: 100%;
     padding: 12px 20px;
@@ -126,7 +108,6 @@ h2 {
 </head>
 <body>
 
-<!-- Back button -->
 <a class="back-btn" href="/Test_project/public/customer/dashboard">← Back</a>
 
 <div class="receipt">
@@ -139,7 +120,6 @@ h2 {
     <hr>
     <p>📍 Please visit the nearest branch to apply the discount.</p>
 
-    <!-- Confirm form -->
     <form action="/Test_project/public/customer/confirm-redeem" method="POST">
         <input type="hidden" name="offer_id" value="<?= $offer['offer_id'] ?>">
         <button type="submit" class="btn-confirm">Confirm Offer</button>

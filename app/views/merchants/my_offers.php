@@ -18,7 +18,6 @@ $offers = $offers ?? [];
 
 <style>
 
-    /* 🔵 زر Merchant Panel أعلى الشمال */
     .back-top-btn {
         position: absolute;
         top: 20px;
@@ -81,7 +80,6 @@ $offers = $offers ?? [];
         color:#28a745;
     }
 
-    /* زر Back أسفل الصفحة */
     .back-btn {
         display: inline-block;
         margin-top: 25px;
@@ -102,7 +100,6 @@ $offers = $offers ?? [];
 
 <body>
 
-<!-- 🔵 زر Merchant Panel -->
 <a class="back-top-btn" href="/Test_project/public/merchant/dashboard">← Merchant Panel</a>
 
 <h2>My Offers</h2>

@@ -5,9 +5,7 @@
     <title>Your Redeemed Offers</title>
 
     <style>
-        /* ======================================
-           GLOBAL BACKGROUND + PAGE RESET
-        ======================================= */
+
         body { 
             font-family: "Segoe UI", Arial, sans-serif;
             margin: 0; padding: 0;
@@ -22,15 +20,7 @@
             color: #fff;
         }
 
-        @keyframes bgFlow {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
 
-        /* ======================================
-           BACK BUTTON (TOP LEFT)
-        ======================================= */
         .back-btn {
             display: inline-block;
             background: rgba(255,255,255,0.18);
@@ -51,9 +41,7 @@
             transform: translateY(-3px);
         }
 
-        /* ======================================
-           PAGE TITLE
-        ======================================= */
+
         h2 {
             text-align: center;
             margin-top: 10px;
@@ -65,18 +53,14 @@
             text-shadow: 0 3px 10px rgba(0,0,0,0.3);
         }
 
-        /* ======================================
-           CONTAINER
-        ======================================= */
+
         .container {
             width: 90%;
             max-width: 650px;
             margin: 20px auto;
         }
 
-        /* ======================================
-           OFFER CARD
-        ======================================= */
+
         .offer-card {
             background: rgba(255,255,255,0.85);
             padding: 18px;
@@ -94,10 +78,7 @@
             animation: fadeUp 0.7s ease;
         }
 
-        @keyframes fadeUp {
-            0% { opacity: 0; transform: translateY(25px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+
 
         .offer-card h3 {
             margin: 0;
@@ -115,9 +96,7 @@
             margin-top: 6px;
         }
 
-        /* ======================================
-           EMPTY MESSAGE
-        ======================================= */
+
         .no-offers {
             text-align: center;
             margin-top: 40px;
@@ -131,7 +110,6 @@
 
 <body>
 
-<!-- زر Back في الشمال -->
 <a class="back-btn" href="/Test_project/public/customer/dashboard">← Back</a>
 
 <h2>Your Redeemed Offers</h2>

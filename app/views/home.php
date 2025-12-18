@@ -10,7 +10,6 @@ if (session_status() === PHP_SESSION_NONE) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS -->
   <link rel="stylesheet" href="/Test_project/public/css/stylee.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -45,16 +44,75 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
     <div class="header-col">
-      <ul class="button">
+
+
+      <!-- <ul class="button">
         <li>
           <a href="/Test_project/public/login" class="btn">Login</a>
         </li>
         <li>
           <a href="/Test_project/public/select-user-type" class="btn">Register</a>
         </li>
-      </ul>
+      </ul> -->
+
+
+
+      <ul class="button">
+
+<?php if (isset($_SESSION['user'])): ?>
+
+    <li>
+        <span class="btn" style="background:transparent;color:#93c5fd;cursor:default;">
+            <?= htmlspecialchars($_SESSION['user']['name']) ?>
+        </span>
+    </li>
+
+    <?php if ($_SESSION['role'] === 'customer'): ?>
+        <li>
+            <a href="/Test_project/public/customer/dashboard" class="btn">
+                Dashboard
+            </a>
+        </li>
+
+    <?php elseif ($_SESSION['role'] === 'merchant'): ?>
+        <li>
+            <a href="/Test_project/public/merchant/dashboard" class="btn">
+                Dashboard
+            </a>
+        </li>
+
+    <?php elseif ($_SESSION['role'] === 'admin'): ?>
+        <li>
+            <a href="/Test_project/public/admin/dashboard" class="btn">
+                Admin Panel
+            </a>
+        </li>
+    <?php endif; ?>
+
+    <li>
+        <a href="/Test_project/public/logout" class="btn">
+            Logout
+        </a>
+    </li>
+
+<?php else: ?>
+
+    <li>
+        <a href="/Test_project/public/login" class="btn">Login</a>
+    </li>
+    <li>
+        <a href="/Test_project/public/select-user-type" class="btn">Register</a>
+    </li>
+
+<?php endif; ?>
+
+</ul>
+
+
     </div>
   </div>
+
+
 </header>
 
   <section id="home" class="hero">

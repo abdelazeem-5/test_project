@@ -6,9 +6,7 @@
     <title>Value Based Program</title>
 
     <style>
-        /* ======================================
-           GLOBAL BACKGROUND — Same Login Style
-        ======================================= */
+
         body {
             margin: 0;
             padding: 0;
@@ -22,7 +20,6 @@
             position: relative;
         }
 
-        /* Transparent overlay */
         body::before {
             content: "";
             position: absolute;
@@ -31,9 +28,7 @@
             backdrop-filter: blur(3px);
         }
 
-        /* ======================================
-           MAIN CARD (Glassmorphism)
-        ======================================= */
+
         .container {
             position: relative;
             z-index: 2;
@@ -48,17 +43,9 @@
             animation: fadeIn 0.7s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(25px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ======================================
-           TEXT STYLING
-        ======================================= */
         h1 {
             font-size: 32px;
-            color: #4ee44e; /* لون أخضر مميز يشير للـ charity */
+            color: #4ee44e; 
             margin-bottom: 15px;
             text-shadow: 0 2px 6px rgba(0,0,0,0.4);
         }
@@ -70,9 +57,6 @@
             line-height: 1.6;
         }
 
-        /* ======================================
-           BUTTON
-        ======================================= */
         .btn {
             display: inline-block;
             padding: 14px 22px;

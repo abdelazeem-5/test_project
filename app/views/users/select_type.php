@@ -7,9 +7,6 @@
 
 <style>
 
-/* -----------------------------------
-   BACK BUTTON (TOP LEFT)
------------------------------------- */
 .back-btn {
     position: absolute;
     top: 20px;
@@ -37,9 +34,6 @@
 }
 
 
-/* -----------------------------------
-   GLOBAL GRADIENT BACKGROUND
------------------------------------- */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
@@ -56,15 +50,7 @@ body {
     animation: gradientFlow 12s ease infinite;
 }
 
-@keyframes gradientFlow {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 
-/* -----------------------------------
-   PAGE TITLE
------------------------------------- */
 h2 {
     text-align: center;
     font-size: 32px;
@@ -75,9 +61,7 @@ h2 {
     font-weight: 700;
 }
 
-/* -----------------------------------
-   CARD CONTAINER
------------------------------------- */
+
 form {
     width: 380px;
     padding: 28px;
@@ -92,14 +76,7 @@ form {
     animation: fadeInUp 0.75s ease;
 }
 
-@keyframes fadeInUp {
-    0% { opacity: 0; transform: translateY(35px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
 
-/* -----------------------------------
-   RADIO LABELS (OPTION BOXES)
------------------------------------- */
 label {
     font-size: 18px;
     cursor: pointer;
@@ -130,14 +107,10 @@ label:hover {
     box-shadow: 0 4px 12px rgba(30,136,229,0.35);
 }
 
-/* Radio input hidden */
 label input[type="radio"] {
     transform: scale(1.4);
 }
 
-/* -----------------------------------
-   CONTINUE BUTTON
------------------------------------- */
 button {
     width: 100%;
     padding: 15px;
@@ -168,7 +141,6 @@ button:hover {
 </head>
 <body>
 
-<!-- 🔵 BACK BUTTON -->
 <a class="back-btn" href="/Test_project/public/">← Back to Home</a>
 
 <h2>Select User Type</h2>

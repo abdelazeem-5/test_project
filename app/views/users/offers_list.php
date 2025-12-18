@@ -6,9 +6,7 @@
 
 <style>
 
-/* ========================================
-   GLOBAL BACKGROUND
-======================================== */
+
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
@@ -22,15 +20,7 @@ body {
     color: white;
 }
 
-@keyframes moveBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 
-/* ========================================
-   BACK BUTTON (Top Left)
-======================================== */
 .back-top {
     position: absolute;
     top: 20px;
@@ -56,9 +46,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* ========================================
-   PAGE TITLE
-======================================== */
+
 h2 {
     text-align: center;
     color: white;
@@ -68,9 +56,7 @@ h2 {
     text-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 
-/* ========================================
-   OFFERS GRID
-======================================== */
+
 .offers-grid {
     max-width: 1000px;
     margin: 30px auto;
@@ -79,9 +65,7 @@ h2 {
     gap: 25px;
 }
 
-/* ========================================
-   OFFER CARD (Glass Style)
-======================================== */
+
 .offer-card {
     background: rgba(255,255,255,0.90);
     padding: 18px;
@@ -96,10 +80,6 @@ h2 {
     animation: fadeUp 0.7s ease;
 }
 
-@keyframes fadeUp {
-    0% { opacity: 0; transform: translateY(25px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
 
 .offer-card h3 {
     margin: 0;
@@ -114,9 +94,7 @@ h2 {
     color: #444;
 }
 
-/* ========================================
-   Use Offer Button
-======================================== */
+
 .redeem-btn {
     display: inline-block;
     padding: 10px 16px;
@@ -137,9 +115,7 @@ h2 {
     box-shadow: 0 10px 20px rgba(40,167,69,0.45);
 }
 
-/* ========================================
-   Bottom Back to Home
-======================================== */
+
 .back-bottom {
     text-align: center;
     margin-top: 40px;
@@ -150,7 +126,6 @@ h2 {
 </head>
 <body>
 
-<!-- 🔵 Back Button (تم تبديله إلى Back to Home) -->
 <div class="back-top">
     <a href="/Test_project/public/" class="btn-blue">← Back to Home</a>
 </div>
@@ -182,7 +157,6 @@ h2 {
     <?php endif; ?>
 </div>
 
-<!-- 🔵 Bottom Button (تم تبديله إلى Customer Panel) -->
 <div class="back-bottom">
     <a href="/Test_project/public/customer/dashboard" class="btn-blue">← Customer Panel</a>
 </div>

@@ -7,9 +7,7 @@
 
 <style>
 
-/* -----------------------------------
-   BACK BUTTON (TOP LEFT)
------------------------------------- */
+
 .back-btn {
     position: absolute;
     top: 20px;
@@ -37,9 +35,7 @@
 }
 
 
-/* -----------------------------------
-   GLOBAL PAGE STYLE
------------------------------------- */
+
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
@@ -59,7 +55,6 @@ body {
 }
 
 
-/* BRANDING */
 .brand {
     text-align: center;
     margin-bottom: 20px;
@@ -80,7 +75,6 @@ body {
     margin-top: 8px;
 }
 
-/* LOGIN CARD */
 form {
     width: 380px;
     background: rgba(255,255,255,0.98);
@@ -94,10 +88,6 @@ form {
     animation: fadeInUp 0.85s ease;
 }
 
-@keyframes fadeInUp {
-    0%   { opacity: 0; transform: translateY(40px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
 
 label {
     font-size: 15px;
@@ -124,7 +114,6 @@ input:focus {
     transform: scale(1.02);
 }
 
-/* LOGIN BUTTON */
 button {
     width: 100%;
     padding: 15px;
@@ -148,7 +137,6 @@ button:hover {
     box-shadow: 0 12px 22px rgba(21,101,192,0.45);
 }
 
-/* ERROR BOX */
 .alert {
     width: 380px;
     background: #ffebee;
@@ -162,7 +150,6 @@ button:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* CREATE ACCOUNT LINK */
 p {
     text-align: center;
     color: #e3f2fd;
@@ -191,23 +178,19 @@ input, textarea, select, button {
 
 <body>
 
-<!-- 🔵 BACK TO HOME BUTTON -->
 <a class="back-btn" href="/Test_project/public/">← Back to Home</a>
 
-<!-- BRANDING -->
 <div class="brand">
     <h1>Login</h1>
     <p>Your smart rewards system</p>
 </div>
 
-<!-- ERROR MESSAGE -->
 <?php if (isset($error)): ?>
     <div class="alert">
         <?= htmlspecialchars($error) ?>
     </div>
 <?php endif; ?>
 
-<!-- LOGIN CARD -->
 <form action="/Test_project/public/login" method="POST">
 
     <label>Email</label>
@@ -220,7 +203,7 @@ input, textarea, select, button {
 </form>
 
 <p>
-    Don’t have an account?
+    Don,t have an account?
     <a href="/Test_project/public/select-user-type">Create an account</a>
 </p>
 

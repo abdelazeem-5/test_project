@@ -15,12 +15,10 @@ class SubscriptionModel
 
     public function createSubscription($customer_id, $tier = 'silver', $program_type = 'points_based')
 {
-    // 1️⃣ حذف أي اشتراك سابق لنفس العميل
     $deleteQuery = "DELETE FROM {$this->table} WHERE customer_id = :customer_id";
     $deleteStmt = $this->conn->prepare($deleteQuery);
     $deleteStmt->execute([":customer_id" => $customer_id]);
 
-    // 2️⃣ إنشاء الاشتراك الجديد
     $query = "INSERT INTO {$this->table} 
             (customer_id, tier, program_type, status)
             VALUES (:customer_id, :tier, :program_type, 'active')";
@@ -35,7 +33,6 @@ class SubscriptionModel
 }
 
 
-    // Get subscriptions for a customer
     public function getSubscriptionsByCustomer(int $customer_id): array
     {
         $query = "SELECT * FROM {$this->table} WHERE customer_id = :customer_id";
@@ -46,7 +43,6 @@ class SubscriptionModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Update subscription (tier/program_type)
     public function updateSubscription(int $subscription_id, ?string $tier = null, ?string $program_type = null): bool
     {
         $updates = [];
@@ -74,7 +70,6 @@ class SubscriptionModel
         return $stmt->execute($params);
     }
 
-    // Cancel subscription
     public function cancelSubscription(int $subscription_id): bool
     {
         $query = "UPDATE {$this->table} 
@@ -85,7 +80,6 @@ class SubscriptionModel
         return $stmt->execute([":id" => $subscription_id]);
     }
 
-    // Get a single subscription
     public function getSubscriptionById(int $subscription_id): array|false
     {
         $query = "SELECT * FROM {$this->table} 
@@ -123,6 +117,16 @@ public function deleteSubscription($id)
     return $stmt->execute([":id" => $id]);
 }
 
+
+
+
+public function deleteByCustomer($customerId)
+{
+    $stmt = $this->conn->prepare(
+        "DELETE FROM subscriptions WHERE customer_id = ?"
+    );
+    return $stmt->execute([$customerId]);
+}
 
 
 }

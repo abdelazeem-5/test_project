@@ -10,19 +10,18 @@
 
     <style>
         body {
-            background: #f4f6f9; /* موحّد مع باقي الصفحات */
+            background: #f4f6f9; 
         }
 
-        /* Sidebar */
         .sidebar {
             height: 100vh;
-            background: #0d1b2a; /* أزرق غامق أنيق */
+            background: #0d1b2a; 
             color: white;
             padding: 20px;
         }
 
         .sidebar a {
-            color: #cfd9e6; /* أزرق فاتح */
+            color: #cfd9e6; 
             display: block;
             padding: 10px 0;
             text-decoration: none;
@@ -32,12 +31,11 @@
 
         .sidebar a:hover {
             color: #ffffff;
-            background: #007bff; /* نفس الزر المستخدم في بقية الصفحات */
+            background: #007bff; 
             padding-left: 12px;
             border-radius: 6px;
         }
 
-        /* Content area */
         .content {
             padding: 30px;
         }
@@ -46,14 +44,13 @@
             color: #333;
         }
 
-        /* Dashboard cards */
         .card-box {
             padding: 20px;
             border-radius: 10px;
             background: white;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             margin-bottom: 20px;
-            border-left: 6px solid #007bff; /* توحيد التصميم */
+            border-left: 6px solid #007bff; 
             transition: 0.3s;
         }
 

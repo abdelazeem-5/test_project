@@ -39,9 +39,7 @@
         z-index: 5;
     }
 
-    /* ================================
-       BACK BUTTON (TOP LEFT)
-    ================================= */
+
     .back-top {
         position: absolute;
         top: 20px;
@@ -67,9 +65,7 @@
         transform: translateY(-3px);
     }
 
-    /* ================================
-       TITLES
-    ================================= */
+
     h2 {
         text-align: center;
         font-size: 32px;
@@ -86,9 +82,6 @@
         font-size: 16px;
     }
 
-    /* ================================
-       FORM
-    ================================= */
     form {
         width: 90%;
         max-width: 380px;
@@ -102,10 +95,7 @@
         animation: fadeIn 0.7s ease;
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(25px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
+
 
     label {
         font-size: 17px;
@@ -159,7 +149,6 @@
 
 <body>
 
-<!-- BACK BUTTON -->
 <div class="back-top">
     <a href="/Test_project/public/" class="btn-back">← Back to Home</a>
 </div>

@@ -73,14 +73,12 @@ if (!$customer || ($_SESSION["role"] ?? null) !== "customer") {
 
 <div class="row g-0">
 
-    <!-- Sidebar -->
     <div class="col-3 sidebar">
         <h3>Customer Panel</h3>
         <hr style="border-color:#cfd9e6">
 
         <a href="/Test_project/public/customer/dashboard">🏠 Dashboard</a>
 
-        <!-- تم إصلاح الرابط -->
         <a href="/Test_project/public/offers">🎁 View All Offers</a>
 
         <a href="/Test_project/public/customer/redeemed-offers">📄 My Redeemed Offers</a>
@@ -90,7 +88,6 @@ if (!$customer || ($_SESSION["role"] ?? null) !== "customer") {
         <a href="/Test_project/public">🚪 Logout</a>
     </div>
 
-    <!-- Content -->
     <div class="col-9 content">
         <h2>Welcome, <?= htmlspecialchars($customer['name']) ?>!</h2>
 

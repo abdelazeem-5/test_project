@@ -13,12 +13,10 @@ require ROOT_PATH . "/app/controllers/MerchantController.php";
 
 $router = new Router();
 
-/* ------------------ Home ------------------ */
 $router->add("/", function () {
     require ROOT_PATH . "/app/views/home.php";
 });
 
-/* ------------------ User Authentication ------------------ */
 $router->add("/select-user-type",  fn() => (new UserController())->selectUserType());
 $router->add("/register-customer", fn() => (new UserController())->registerCustomer());
 $router->add("/register-merchant", fn() => (new UserController())->registerMerchant());
@@ -29,23 +27,19 @@ $router->add("/register", function () {
     exit;
 });
 
-/* ------------------ Subscriptions ------------------ */
 $router->add("/subscription/join", fn() => (new SubscriptionController())->join());
 $router->add("/subscription/points", fn() => require ROOT_PATH . "/app/views/subscriptions/points.php");
 $router->add("/subscription/value", fn() => require ROOT_PATH . "/app/views/subscriptions/value.php");
-
 $router->add("/subscription/cancel", function () {
     if (!isset($_GET['id'])) return print("Missing subscription ID");
     (new SubscriptionController())->cancel($_GET['id']);
 });
-
 $router->add("/subscription/mine", function () {
     if (!isset($_GET['customer_id'])) return print("Missing customer ID");
     (new SubscriptionController())->mySubscriptions($_GET['customer_id']);
 });
 
 
-/* ------------------ Admin ------------------ */
 $router->add("/admins/login", fn() => (new AdminController())->login());
 $router->add("/admins/dashboard", fn() => (new AdminController())->dashboard());
 
@@ -53,8 +47,6 @@ $router->add("/admins/view_customers", fn() => (new AdminController())->viewCust
 $router->add("/admins/view_merchants", fn() => (new AdminController())->viewMerchants());
 $router->add("/admins/view_subscriptions", fn() => (new AdminController())->viewSubscriptions());
 $router->add("/admins/view_offers", fn() => (new AdminController())->getAllOffers());
-
-/* ---- DELETE ROUTES ---- */
 $router->add("/admins/delete_customer", fn() => (new AdminController())->deleteCustomer());
 $router->add("/admins/delete_merchant", fn() => (new AdminController())->deleteMerchant());
 $router->add("/admins/delete_offer", fn() => (new AdminController())->deleteOffer());
@@ -62,8 +54,6 @@ $router->add("/admins/delete_subscription", fn() => (new AdminController())->del
 
 
 
-/* ------------------ Merchant ------------------ */
-$router->add("/merchant/dashboard", fn() => (new MerchantController())->dashboard());
 
 /* ------------------ Customer ------------------ */
 $router->add("/customer/redeem-offer", fn() => (new UserController())->redeemOffer());
@@ -74,7 +64,7 @@ $router->add("/customer/points", fn() => (new UserController())->customerPoints(
 
 
 
-/* ------------------ Merchant Offers ------------------ */
+$router->add("/merchant/dashboard", fn() => (new MerchantController())->dashboard());
 $router->add("/merchant/offers", fn() => (new MerchantController())->offers());
 $router->add("/merchant/offers/create", fn() => (new MerchantController())->createOffer());
 $router->add("/merchant/offers/edit-list", fn() => (new MerchantController())->editOffers());
@@ -94,11 +84,8 @@ $router->add("/merchant/profile", fn() => (new MerchantController())->profile())
 $router->add("/merchant/my-offers", fn() => (new MerchantController())->myOffers());
 
 
-/* ------------------ Customer Dashboard & Profile ------------------ */
 $router->add("/customer/dashboard", fn() => (new UserController())->customerDashboard());
 $router->add("/customer/profile", fn() => (new UserController())->customerProfile());
-
-
 $router->add("/customer/dashboard", fn() => (new UserController())->customerDashboard());
 $router->add("/customer/profile", fn() => (new UserController())->customerProfile());
 $router->add("/customer/redeemed-offers", fn() => (new UserController())->redeemedOffers());
@@ -112,23 +99,18 @@ $router->add("/customer/confirm-redeem", function () {
 });
 
 
-/* ------------------ Path Handling ------------------ */
 $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 $basePath = "/Test_project/public";
 
-// Remove base path
 if (stripos($path, $basePath) === 0) {
     $path = substr($path, strlen($basePath));
 }
-// Remove trailing slash
 $path = rtrim($path, "/");
 if ($path === "") 
 {
     $path = "/";
 }
 
-
-/* ------------------ Run Router ------------------ */
 $router->dispatch($path);
 
 

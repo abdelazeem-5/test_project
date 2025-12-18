@@ -13,9 +13,6 @@ if (!isset($_SESSION["user"])) {
 
 <style>
 
-/* ================================
-   GLOBAL BACKGROUND
-================================ */
 body {
     margin: 0;
     font-family: "Segoe UI", Arial, sans-serif;
@@ -28,15 +25,7 @@ body {
     padding-top: 80px;
 }
 
-@keyframes bgMove {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 
-/* ================================
-   CONFIRM BOX (Glassmorphism)
-================================ */
 .box {
     width: 90%;
     max-width: 450px;
@@ -57,10 +46,7 @@ body {
     animation: fadeUp 0.7s ease;
 }
 
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(35px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
+
 
 .box h2 {
     margin: 0 0 15px;
@@ -69,18 +55,14 @@ body {
     font-weight: 700;
 }
 
-/* ================================
-   PARAGRAPHS
-================================ */
+
 .box p {
     font-size: 16px;
     color: #333;
     margin: 8px 0;
 }
 
-/* ================================
-   CONFIRM BUTTON
-================================ */
+
 .btn-confirm {
     background: linear-gradient(90deg, #28a745, #43c067);
     color: white;
@@ -105,9 +87,7 @@ body {
     box-shadow: 0 12px 25px rgba(40,167,69,0.45);
 }
 
-/* ================================
-   BACK LINK
-================================ */
+
 .btn-back {
     display: block;
     margin-top: 18px;
@@ -137,13 +117,11 @@ body {
     <p><?= nl2br(htmlspecialchars($offer["description"])) ?></p>
     <p><b>Final Discount:</b> <?= $offer["final_discount"] ?>%</p>
 
-    <!-- Confirm Button -->
     <form action="/Test_project/public/customer/confirm-redeem" method="POST">
         <input type="hidden" name="offer_id" value="<?= $offer["offer_id"] ?>">
         <button class="btn-confirm">Confirm Use</button>
     </form>
 
-    <!-- Back button -->
     <a href="/Test_project/public/offers" class="btn-back">← Back to Offers</a>
 
 </div>

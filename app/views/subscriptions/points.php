@@ -6,9 +6,7 @@
     <title>Points Based Program</title>
 
     <style>
-        /* ================================
-           GLOBAL BACKGROUND (Same Login Style)
-        ================================= */
+
         body {
             margin: 0;
             padding: 0;
@@ -22,7 +20,6 @@
             position: relative;
         }
 
-        /* Dark transparent overlay */
         body::before {
             content: "";
             position: absolute;
@@ -31,9 +28,7 @@
             backdrop-filter: blur(3px);
         }
 
-        /* ================================
-           BOX (Glassmorphism Card)
-        ================================= */
+
         .container {
             position: relative;
             z-index: 2;
@@ -48,14 +43,8 @@
             animation: fadeIn 0.7s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(25px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
 
-        /* ================================
-           TEXT STYLE
-        ================================= */
+
         h1 {
             font-size: 32px;
             color: #ffffff;
@@ -70,9 +59,7 @@
             margin-bottom: 25px;
         }
 
-        /* ================================
-           BUTTON
-        ================================= */
+
         .btn {
             display: inline-block;
             padding: 14px 22px;

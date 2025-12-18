@@ -13,9 +13,6 @@ class UserController
         }
     }
 
-    /* =========================
-       SELECT USER TYPE
-    ========================== */
     public function selectUserType()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -38,9 +35,7 @@ class UserController
         $this->selectUserType();
     }
 
-    /* =========================
-       REGISTER CUSTOMER
-    ========================== */
+
     public function registerCustomer()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -59,8 +54,7 @@ class UserController
             $ok    = $model->register($name, $email, $password);
 
             if ($ok) {
-                // بعد التسجيل وديه صفحة اللوجين
-                // header("Location: /Test_project/public/login");
+             
                    header("Location: /Test_project/public/offers");
 
                 exit;
@@ -71,13 +65,10 @@ class UserController
             }
         }
 
-        // GET
         require ROOT_PATH . "/app/views/users/register_customer.php";
     }
 
-    /* =========================
-       REGISTER MERCHANT
-    ========================== */
+
     public function registerMerchant()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -105,13 +96,10 @@ class UserController
             }
         }
 
-        // GET
         require ROOT_PATH . "/app/views/users/register_merchant.php";
     }
 
-    /* =========================
-       LOGIN
-    ========================== */
+
     public function login()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -120,7 +108,6 @@ class UserController
             $password = $_POST["password"] ?? "";
             $error    = null;
 
-            // Try Customer
             $customerModel = new UserModel("customer");
             $customer      = $customerModel->login($email, $password);
 
@@ -136,7 +123,6 @@ class UserController
                 exit;
             }
 
-            // Try Merchant
             $merchantModel = new UserModel("merchant");
             $merchant      = $merchantModel->login($email, $password);
 
@@ -160,9 +146,7 @@ class UserController
         require ROOT_PATH . "/app/views/users/login.php";
     }
 
-    /* =========================
-       LOGOUT
-    ========================== */
+
     public function logout()
     {
         session_destroy();
@@ -170,9 +154,7 @@ class UserController
         exit;
     }
 
-    /* =========================
-       REDEEM PAGE (SHOW ONLY)
-    ========================== */
+
     public function redeemOffer()
     {
         if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "customer") {
@@ -190,14 +172,12 @@ class UserController
         $offerModel = new OfferModel();
         $subModel   = new SubscriptionModel();
 
-        // Fetch offer
         $offer = $offerModel->getOfferById($offerId);
 
         if (!$offer) {
             die("Offer not found.");
         }
 
-        // Subscription tier
         $subscription = $subModel->getSubscriptionByCustomerId($customerId);
 
         $extra = 0;
@@ -210,16 +190,13 @@ class UserController
         }
 
         $merchantDiscount = floatval($offer["discount_value"]);
-        $finalDiscount    = $merchantDiscount + $extra; // خصم التاجر + خصم الاشتراك
-
-        $offer["final_discount"] = $finalDiscount;  // خصم التاجر + خصم الاشتراك = finalDiscount
+        $finalDiscount    = $merchantDiscount + $extra; 
+        $offer["final_discount"] = $finalDiscount;  
 
         require ROOT_PATH . "/app/views/users/receipt.php";
     }
 
-    /* =========================
-       CONFIRM REDEEM (SAVE TO DB)
-    ========================== */
+
     public function confirmRedeem()
 {
     if (!isset($_SESSION["user"]) || $_SESSION["role"] !== "customer") {
@@ -236,14 +213,12 @@ class UserController
 
     $offerModel = new OfferModel();
 
-    // 1️⃣ تنفيذ عملية الـ Redeem (مرة واحدة)
     $saved = $offerModel->logRedeem($customerId, $offerId);
 
     if ($saved) {
 
-        // 2️⃣ إضافة النقاط (مرة واحدة فقط)
         $userModel = new UserModel("customer");
-        $userModel->addPoints($customerId, 10); // ← 10 نقاط لكل عملية
+        $userModel->addPoints($customerId, 10); 
 
         $_SESSION["redeem_success"] = "Offer saved successfully!";
 
@@ -251,15 +226,11 @@ class UserController
         $_SESSION["redeem_error"] = "Failed to save offer.";
     }
 
-    // 3️⃣ Redirect (عشان مفيش تكرار مع Refresh)
     header("Location: /Test_project/public/customer/redeem-offer?id=" . $offerId);
     exit;
 }
 
 
-    /* =========================
-       CUSTOMER DASHBOARD
-    ========================== */
     public function customerDashboard()
     {
         if (!isset($_SESSION["user"]) || $_SESSION["role"] !== "customer") {
@@ -270,9 +241,7 @@ class UserController
         require ROOT_PATH . "/app/views/users/customer_dashboard.php";
     }
 
-    /* =========================
-       VIEW  My REDEEMED OFFERS
-    ========================== */
+
     public function redeemedOffers()
     {
         if (!isset($_SESSION["user"]) || $_SESSION["role"] !== "customer") {
@@ -286,9 +255,7 @@ class UserController
         require ROOT_PATH . "/app/views/users/redeemed_offers.php";
     }
 
-    /* =========================
-       VIEW ALL OFFERS
-    ========================== */
+ 
     public function viewOffers()
     {
         $offerModel = new OfferModel();
@@ -299,9 +266,7 @@ class UserController
         require ROOT_PATH . "/app/views/users/offers_list.php";
     }
 
-    /* =========================
-       CUSTOMER PROFILE (EDIT)
-    ========================== */
+
     public function customerProfile()
     {
         if (!isset($_SESSION["user"]) || $_SESSION["role"] !== "customer") {

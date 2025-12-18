@@ -12,9 +12,7 @@ class AdminModel
         $this->conn = $db->connect();
     }
 
-    // ============================
-    // LOGIN ADMIN
-    // ============================
+
     public function login($email, $password)
     {
         $stmt = $this->conn->prepare("SELECT * FROM admins WHERE email = :email LIMIT 1");
@@ -29,9 +27,7 @@ class AdminModel
         return false;
     }
 
-    // ============================
-    // COUNT TABLE ROWS
-    // ============================
+
     public function countTable($table)
     {
         $stmt = $this->conn->prepare("SELECT COUNT(*) FROM $table");
@@ -39,27 +35,20 @@ class AdminModel
         return $stmt->fetchColumn();
     }
 
-    // ============================
-    // GET ALL CUSTOMERS
-    // ============================
     public function getAllCustomers()
     {
         $stmt = $this->conn->query("SELECT * FROM customers ORDER BY customer_id DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // ============================
-    // GET ALL MERCHANTS
-    // ============================
+
     public function getAllMerchants()
     {
         $stmt = $this->conn->query("SELECT * FROM merchants ORDER BY merchant_id DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // ============================
-    // GET ALL SUBSCRIPTIONS (with join)
-    // ============================
+
     public function getAllSubscriptions()
     {
         $query = "
@@ -75,4 +64,6 @@ class AdminModel
         $stmt = $this->conn->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    
 }

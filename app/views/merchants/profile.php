@@ -17,7 +17,6 @@ $merchant = $_SESSION['user'];
 
 <style>
 
-    /* ===== زر Merchant Panel أعلى الشمال ===== */
     .back-top-btn {
         position: absolute;
         top: 20px;
@@ -36,7 +35,6 @@ $merchant = $_SESSION['user'];
         background: #0056b3;
     }
 
-    /* ===== خلفية محترفة مثل صفحة اللوجين ===== */
     body {
         margin: 0;
         padding: 0;
@@ -52,12 +50,7 @@ $merchant = $_SESSION['user'];
         align-items: center;
     }
 
-    @keyframes bgMove {
-        from { background-position: left; }
-        to   { background-position: right; }
-    }
 
-    /* ===== الكارت الزجاجي ===== */
     .profile-box {
         width: 90%;
         max-width: 400px;
@@ -71,10 +64,6 @@ $merchant = $_SESSION['user'];
         animation: fadeIn 0.7s ease;
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(30px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
 
     h2 {
         text-align: center;
@@ -140,7 +129,6 @@ $merchant = $_SESSION['user'];
 </head>
 <body>
 
-<!-- 🔵 زر Merchant Panel -->
 <a class="back-top-btn" href="/Test_project/public/merchant/dashboard">← Merchant Panel</a>
 
 <div class="profile-box">

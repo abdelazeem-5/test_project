@@ -11,7 +11,6 @@ class UserModel
         $db = new Database();
         $this->conn = $db->connect();
 
-        // اختيار الجدول بناءً على نوع المستخدم
         $this->table = match ($userType) {
             'customer' => 'customers',
             'merchant' => 'merchants',
@@ -20,7 +19,6 @@ class UserModel
         };
     }
 
-    // تسجيل مستخدم جديد
     public function register(string $name, string $email, string $password): bool
     {
         try {
@@ -38,12 +36,10 @@ class UserModel
             ]);
         } 
         catch (PDOException $e) {
-            // لو الإيميل متكرر أو أي خطأ
             return false;
         }
     }
 
-    // تسجيل الدخول
     public function login(string $email, string $password)
     {
         try {
@@ -65,7 +61,6 @@ class UserModel
     }
 public function updateCustomer(int $customerId, string $name, string $email, ?string $password = null): bool
 {
-    // نتأكد أننا شغالين على جدول customers
     if ($this->table !== 'customers') {
         throw new Exception("updateCustomer can only be used with customers table.");
     }
@@ -95,7 +90,6 @@ public function updateCustomer(int $customerId, string $name, string $email, ?st
 
 public function updateMerchant(int $merchantId, string $name, string $email, ?string $password = null): bool
 {
-    // نتأكد أننا شغالين على جدول merchants
     if ($this->table !== 'merchants') {
         throw new Exception("updateMerchant can only be used with merchants table.");
     }
@@ -122,28 +116,18 @@ public function updateMerchant(int $merchantId, string $name, string $email, ?st
     return $stmt->execute($params);
 }
 
-/* ================================
-   DELETE CUSTOMER
-================================ */
 public function deleteCustomer($id)
 {
     $stmt = $this->conn->prepare("DELETE FROM customers WHERE customer_id = ?");
     return $stmt->execute([$id]);
 }
 
-/* ================================
-   DELETE MERCHANT
-================================ */
+
 public function deleteMerchant($id)
 {
     $stmt = $this->conn->prepare("DELETE FROM merchants WHERE merchant_id = ?");
     return $stmt->execute([$id]);
 }
-
-
-    
-
-
 
 
 public function getCustomerPoints(int $customerId): int
@@ -161,7 +145,6 @@ public function getCustomerPoints(int $customerId): int
 
 public function addPoints(int $customerId, int $points): bool
 {
-    // نتأكد إننا شغالين على customers
     if ($this->table !== 'customers') {
         throw new Exception("addPoints can only be used with customers table.");
     }

@@ -7,9 +7,6 @@
 
 <style>
 
-/* -----------------------------------
-   GLOBAL GRADIENT BACKGROUND
------------------------------------- */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
@@ -27,15 +24,7 @@ body {
     position: relative;
 }
 
-@keyframes flowBG {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 
-/* -----------------------------------
-   BACK BUTTON (TOP LEFT)
------------------------------------- */
 .back-btn {
     position: absolute;
     top: 20px;
@@ -57,9 +46,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* -----------------------------------
-   PAGE TITLES
------------------------------------- */
+
 h2 {
     text-align: center;
     font-size: 32px;
@@ -77,9 +64,7 @@ h2 {
     text-align: center;
 }
 
-/* -----------------------------------
-   FORM CARD
------------------------------------- */
+
 form {
     width: 90%;
     max-width: 380px;
@@ -95,14 +80,7 @@ form {
     animation: fadeUp 0.7s ease;
 }
 
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
 
-/* -----------------------------------
-   INPUTS
------------------------------------- */
 input {
     width: 100%;
     padding: 13px;
@@ -127,9 +105,7 @@ input:focus {
     transform: scale(1.02);
 }
 
-/* -----------------------------------
-   SUBMIT BUTTON
------------------------------------- */
+
 button {
     width: 100%;
     padding: 15px;
@@ -155,7 +131,6 @@ button:hover {
     box-shadow: 0 12px 25px rgba(21,101,192,0.45);
 }
 
-/* FIX WIDTH ALIGNMENT */
 input, textarea, select, button {
     width: 100%;
     box-sizing: border-box;
@@ -167,7 +142,6 @@ input, textarea, select, button {
 
 <body>
 
-<!-- 🔵 BACK BUTTON -->
 <a href="/Test_project/public/select-user-type" class="back-btn">← Back</a>
 
 <h2>Customer Registration</h2>

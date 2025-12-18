@@ -7,9 +7,6 @@
 
 <style>
 
-/* ================================
-   GLOBAL BACKGROUND
-================================ */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
@@ -26,18 +23,10 @@ body {
     justify-content: center;
     align-items: center;
 
-    position: relative; /* مهم لزر الباك */
+    position: relative; 
 }
 
-@keyframes moveBG {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 
-/* ================================
-   🔵 BACK BUTTON (Top Left)
-================================ */
 .back-btn {
     position: absolute;
     top: 20px;
@@ -62,9 +51,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* ================================
-   TITLE
-================================ */
+
 h2 {
     text-align: center;
     color: white;
@@ -80,9 +67,7 @@ h2 {
     margin-bottom: 22px;
 }
 
-/* ================================
-   FORM CARD
-================================ */
+
 form {
     width: 90%;
     max-width: 400px;
@@ -100,14 +85,7 @@ form {
     animation: fadeUp 0.7s ease;
 }
 
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
 
-/* ================================
-   LABEL + INPUT
-================================ */
 label {
     display: block;
     margin-top: 15px;
@@ -137,9 +115,6 @@ input:focus {
     outline: none;
 }
 
-/* ================================
-   SAVE BUTTON
-================================ */
 button {
     width: 100%;
     margin-top: 25px;
@@ -179,7 +154,6 @@ input, textarea, select, button {
 </head>
 <body>
 
-<!-- 🔵 زر العودة إلى Customer Panel -->
 <a href="/Test_project/public/customer/dashboard" class="back-btn">← Customer Panel</a>
 
 <?php $customer = $_SESSION["user"]; ?>

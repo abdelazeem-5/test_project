@@ -1,5 +1,4 @@
 <?php
-// this view requires $offers array sent from AdminController
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +41,6 @@
                     <td><?= htmlspecialchars($offer['discount_value']) ?></td>
                     <td><?= $offer['created_at'] ?></td>
 
-                    <!-- Delete Button -->
                     <td>
                         <a href="/Test_project/public/admins/delete-offer?id=<?= $offer['offer_id'] ?>"
                            class="btn btn-danger btn-sm"
