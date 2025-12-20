@@ -22,6 +22,8 @@ class AdminController
             $admin = $model->login($email, $password);
 
             if ($admin) {
+                session_regenerate_id(true);
+
                 $_SESSION['admin'] = $admin;
 
                 header("Location: /Test_project/public/admins/dashboard");

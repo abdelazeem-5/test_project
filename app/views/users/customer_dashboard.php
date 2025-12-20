@@ -76,16 +76,13 @@ if (!$customer || ($_SESSION["role"] ?? null) !== "customer") {
     <div class="col-3 sidebar">
         <h3>Customer Panel</h3>
         <hr style="border-color:#cfd9e6">
-
+        
         <a href="/Test_project/public/customer/dashboard">🏠 Dashboard</a>
-
         <a href="/Test_project/public/offers">🎁 View All Offers</a>
-
         <a href="/Test_project/public/customer/redeemed-offers">📄 My Redeemed Offers</a>
-
+        <a href="/Test_project/public/subscription/join">💳 subscriptions</a>
         <a href="/Test_project/public/customer/profile">⚙ Edit Profile</a>
-
-        <a href="/Test_project/public">🚪 Logout</a>
+        <a href="/Test_project/public">🚪 Back to Home</a>
     </div>
 
     <div class="col-9 content">

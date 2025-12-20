@@ -30,10 +30,10 @@ class UserController
         require ROOT_PATH . "/app/views/users/select_type.php";
     }
 
-    public function handleUserType()
-    {
-        $this->selectUserType();
-    }
+    // public function handleUserType()
+    // {
+    //     $this->selectUserType();
+    // }
 
 
     public function registerCustomer()
@@ -51,11 +51,12 @@ class UserController
             }
 
             $model = new UserModel("customer");
-            $ok    = $model->register($name, $email, $password);
+            $test    = $model->register($name, $email, $password);
 
-            if ($ok) {
+            if ($test) {
              
-                   header("Location: /Test_project/public/offers");
+                   header("Location: /Test_project/public/customer/dashboard");
+                   
 
                 exit;
             } else {
@@ -84,10 +85,12 @@ class UserController
             }
 
             $model = new UserModel("merchant");
-            $ok    = $model->register($name, $email, $password);
+            $test    = $model->register($name, $email, $password);
 
-            if ($ok) {
+            if ($test) {
                 header("Location: /Test_project/public/login");
+
+                
                 exit;
             } else {
                 $error = "Merchant registration failed (email may already exist).";
@@ -108,8 +111,8 @@ class UserController
             $password = $_POST["password"] ?? "";
             $error    = null;
 
-            $customerModel = new UserModel("customer");
-            $customer      = $customerModel->login($email, $password);
+            $customerlogin = new UserModel("customer");
+            $customer      = $customerlogin->login($email, $password);
 
             if ($customer) {
                 $_SESSION["user"] = [
@@ -123,8 +126,8 @@ class UserController
                 exit;
             }
 
-            $merchantModel = new UserModel("merchant");
-            $merchant      = $merchantModel->login($email, $password);
+            $merchantlogin = new UserModel("merchant");
+            $merchant      = $merchantlogin->login($email, $password);
 
             if ($merchant) {
                 $_SESSION["user"] = [
@@ -180,17 +183,17 @@ class UserController
 
         $subscription = $subModel->getSubscriptionByCustomerId($customerId);
 
-        $extra = 0;
+        $x = 0;
         if ($subscription) {
             switch ($subscription["tier"]) {
-                case "silver":   $extra = 10; break;
-                case "gold":     $extra = 20; break;
-                case "platinum": $extra = 30; break;
+                case "silver":   $x = 10; break;
+                case "gold":     $x = 20; break;
+                case "platinum": $x = 30; break;
             }
         }
 
         $merchantDiscount = floatval($offer["discount_value"]);
-        $finalDiscount    = $merchantDiscount + $extra; 
+        $finalDiscount    = $merchantDiscount + $x; 
         $offer["final_discount"] = $finalDiscount;  
 
         require ROOT_PATH . "/app/views/users/receipt.php";

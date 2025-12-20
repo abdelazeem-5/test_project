@@ -87,10 +87,8 @@ $merchant = $_SESSION["user"];
         <a href="/Test_project/public/merchant/offers/create">➕ Add Offers</a>
         <a href="/Test_project/public/merchant/offers/edit-list">✏ Update Offers</a>
         <a href="/Test_project/public/merchant/offers/delete-list">🗑 Delete Offers</a>
+        <a href="/Test_project/public">🚪 Back to Home</a>
 
-        <a href="/Test_project/public" class="logout" style="color:#ffb3b3;">
-            🚪 Logout
-        </a>
     </div>
 
     <div class="col-9 content">

@@ -36,6 +36,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <li><a href="/Test_project/public/customer/points">EarnPoints</a></li>
             <li><a href="/Test_project/public/customer/redeemed-offers">Redeem</a></li>
             <li><a href="/Test_project/public/offers">Offers</a></li>
+            <li><a href="/Test_project/public/subscription/join">subscriptions</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
 
@@ -44,16 +45,6 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
     <div class="header-col">
-
-
-      <!-- <ul class="button">
-        <li>
-          <a href="/Test_project/public/login" class="btn">Login</a>
-        </li>
-        <li>
-          <a href="/Test_project/public/select-user-type" class="btn">Register</a>
-        </li>
-      </ul> -->
 
 
 
@@ -239,6 +230,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
   <p class="footer-bottom">
     Loyalty Web App. All Rights Reserved.
+    created by abdelazeem
   </p>
 </footer>
 

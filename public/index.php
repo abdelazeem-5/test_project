@@ -13,19 +13,15 @@ require ROOT_PATH . "/app/controllers/MerchantController.php";
 
 $router = new Router();
 
-$router->add("/", function () {
-    require ROOT_PATH . "/app/views/home.php";
-});
+$router->add("/", function () { require ROOT_PATH . "/app/views/home.php"; });
 
 $router->add("/select-user-type",  fn() => (new UserController())->selectUserType());
 $router->add("/register-customer", fn() => (new UserController())->registerCustomer());
 $router->add("/register-merchant", fn() => (new UserController())->registerMerchant());
 $router->add("/login",             fn() => (new UserController())->login());
 $router->add("/logout",            fn() => (new UserController())->logout());
-$router->add("/register", function () {
-    header("Location: /Test_project/public/select-user-type");
-    exit;
-});
+$router->add("/register", function () { header("Location: /Test_project/public/select-user-type"); exit;});
+
 
 $router->add("/subscription/join", fn() => (new SubscriptionController())->join());
 $router->add("/subscription/points", fn() => require ROOT_PATH . "/app/views/subscriptions/points.php");
@@ -49,17 +45,14 @@ $router->add("/admins/view_subscriptions", fn() => (new AdminController())->view
 $router->add("/admins/view_offers", fn() => (new AdminController())->getAllOffers());
 $router->add("/admins/delete_customer", fn() => (new AdminController())->deleteCustomer());
 $router->add("/admins/delete_merchant", fn() => (new AdminController())->deleteMerchant());
-$router->add("/admins/delete_offer", fn() => (new AdminController())->deleteOffer());
+$router->add("/admins/delete-offer", fn() => (new AdminController())->deleteOffer());
 $router->add("/admins/delete_subscription", fn() => (new AdminController())->deleteSubscription());
 
 
 
 
-/* ------------------ Customer ------------------ */
 $router->add("/customer/redeem-offer", fn() => (new UserController())->redeemOffer());
 $router->add("/customer/redeemed-offers", fn() => (new UserController())->redeemedOffers());
-
-
 $router->add("/customer/points", fn() => (new UserController())->customerPoints());
 
 
@@ -87,7 +80,6 @@ $router->add("/merchant/my-offers", fn() => (new MerchantController())->myOffers
 $router->add("/customer/dashboard", fn() => (new UserController())->customerDashboard());
 $router->add("/customer/profile", fn() => (new UserController())->customerProfile());
 $router->add("/customer/dashboard", fn() => (new UserController())->customerDashboard());
-$router->add("/customer/profile", fn() => (new UserController())->customerProfile());
 $router->add("/customer/redeemed-offers", fn() => (new UserController())->redeemedOffers());
 
 
@@ -112,11 +104,4 @@ if ($path === "")
 }
 
 $router->dispatch($path);
-
-
-
-
-
-
-
 

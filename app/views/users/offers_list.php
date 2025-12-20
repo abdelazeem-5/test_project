@@ -127,7 +127,7 @@ h2 {
 <body>
 
 <div class="back-top">
-    <a href="/Test_project/public/" class="btn-blue">← Back to Home</a>
+    <a href="/Test_project/public/customer/dashboard" class="btn-blue">← Customer Panel</a>
 </div>
 
 <h2>All Available Offers</h2>
@@ -158,7 +158,8 @@ h2 {
 </div>
 
 <div class="back-bottom">
-    <a href="/Test_project/public/customer/dashboard" class="btn-blue">← Customer Panel</a>
+        <a href="/Test_project/public/" class="btn-blue">← Back to Home</a>
+
 </div>
 
 </body>
