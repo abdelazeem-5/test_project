@@ -175,7 +175,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
       <div class="category-card">
         <img src="/Test_project/public/images/Entertainment.jpeg" alt="Entertainment">
-        <h3>Entertainment</h3>
+        <h3>Entertainments</h3>
       </div>
 
       <div class="category-card">

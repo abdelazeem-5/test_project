@@ -4,7 +4,7 @@ require_once ROOT_PATH . "/app/config/database.php";
 
 class OfferModel
 {
-    private PDO $conn;
+    private $conn;
 
     public function __construct()
     {
@@ -110,7 +110,13 @@ class OfferModel
             ":offer_id"    => $offer_id
         ]);
 
-        return $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) 
+        {
+            return true;
+        }
+        return false;
+
     }
 
     public function logRedeem($customer_id, $offer_id)
@@ -144,8 +150,6 @@ class OfferModel
     $stmt->execute([":customer_id" => $customer_id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
-
 
 
 

@@ -61,14 +61,6 @@ class SubscriptionController
         }
     }
 
-    public function cancel($id)
-    {
-        $model = new SubscriptionModel();
-        $success = $model->cancelSubscription((int)$id);
-
-        echo $success ? "Subscription Cancelled" : "Cancel Failed";
-    }
-
 
     public function mySubscriptions($customer_id)
     {

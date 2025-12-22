@@ -26,14 +26,6 @@ $router->add("/register", function () { header("Location: /Test_project/public/s
 $router->add("/subscription/join", fn() => (new SubscriptionController())->join());
 $router->add("/subscription/points", fn() => require ROOT_PATH . "/app/views/subscriptions/points.php");
 $router->add("/subscription/value", fn() => require ROOT_PATH . "/app/views/subscriptions/value.php");
-$router->add("/subscription/cancel", function () {
-    if (!isset($_GET['id'])) return print("Missing subscription ID");
-    (new SubscriptionController())->cancel($_GET['id']);
-});
-$router->add("/subscription/mine", function () {
-    if (!isset($_GET['customer_id'])) return print("Missing customer ID");
-    (new SubscriptionController())->mySubscriptions($_GET['customer_id']);
-});
 
 
 $router->add("/admins/login", fn() => (new AdminController())->login());
@@ -50,10 +42,14 @@ $router->add("/admins/delete_subscription", fn() => (new AdminController())->del
 
 
 
-
+$router->add("/customer/dashboard", fn() => (new UserController())->customerDashboard());
+$router->add("/customer/profile", fn() => (new UserController())->customerProfile());
+$router->add("/customer/redeemed-offers", fn() => (new UserController())->myredeemedOffers());
 $router->add("/customer/redeem-offer", fn() => (new UserController())->redeemOffer());
-$router->add("/customer/redeemed-offers", fn() => (new UserController())->redeemedOffers());
 $router->add("/customer/points", fn() => (new UserController())->customerPoints());
+$router->add("/customer/confirm-redeem", function () { (new UserController())->confirmRedeem();});
+
+$router->add("/offers", fn() => (new UserController())->viewOffers());
 
 
 
@@ -62,6 +58,8 @@ $router->add("/merchant/offers", fn() => (new MerchantController())->offers());
 $router->add("/merchant/offers/create", fn() => (new MerchantController())->createOffer());
 $router->add("/merchant/offers/edit-list", fn() => (new MerchantController())->editOffers());
 $router->add("/merchant/offers/delete-list", fn() => (new MerchantController())->deleteOffers());
+$router->add("/merchant/profile", fn() => (new MerchantController())->profile());
+$router->add("/merchant/my-offers", fn() => (new MerchantController())->myOffers());
 
 $router->add("/merchant/offers/edit", function () {
     if (!isset($_GET['id'])) return print("Missing Offer ID");
@@ -73,22 +71,6 @@ $router->add("/merchant/offers/delete", function () {
     (new MerchantController())->deleteOfferById((int)$_GET['id']);
 });
 
-$router->add("/merchant/profile", fn() => (new MerchantController())->profile());
-$router->add("/merchant/my-offers", fn() => (new MerchantController())->myOffers());
-
-
-$router->add("/customer/dashboard", fn() => (new UserController())->customerDashboard());
-$router->add("/customer/profile", fn() => (new UserController())->customerProfile());
-$router->add("/customer/dashboard", fn() => (new UserController())->customerDashboard());
-$router->add("/customer/redeemed-offers", fn() => (new UserController())->redeemedOffers());
-
-
-
-$router->add("/offers", fn() => (new UserController())->viewOffers());
-
-$router->add("/customer/confirm-redeem", function () {
-    (new UserController())->confirmRedeem();
-});
 
 
 $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
@@ -104,4 +86,3 @@ if ($path === "")
 }
 
 $router->dispatch($path);
-

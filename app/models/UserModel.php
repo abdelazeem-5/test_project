@@ -3,20 +3,34 @@ require_once ROOT_PATH . "/app/config/database.php";
 
 class UserModel
 {
-    private $conn;
+    private $connection;
     private $table;
 
     public function __construct(string $userType)
     {
         $db = new Database();
-        $this->conn = $db->connect();
+        $this->connection = $db->connect();
 
-        $this->table = match ($userType) {
-            'customer' => 'customers',
-            'merchant' => 'merchants',
-            'admin'    => 'admins',
-            default    => throw new Exception("Invalid user type: $userType"),
-        };
+
+        if ($userType === 'customer') 
+        {
+            $this->table = 'customers';
+        }
+
+        elseif ($userType === 'merchant') 
+        {
+            $this->table = 'merchants';
+        }
+
+        elseif ($userType === 'admin') 
+        {
+            $this->table = 'admins';
+        } 
+        else 
+        {
+            die("Invalid user type");
+        }
+
     }
 
     public function register(string $name, string $email, string $password): bool
@@ -27,7 +41,7 @@ class UserModel
             $query = "INSERT INTO {$this->table} (name, email, password_hash)
                       VALUES (:name, :email, :password_hash)";
             
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->connection->prepare($query);
 
             return $stmt->execute([
                 ":name"          => htmlspecialchars($name),
@@ -44,7 +58,7 @@ class UserModel
     {
         try {
             $query = "SELECT * FROM {$this->table} WHERE email = :email LIMIT 1";
-            $stmt  = $this->conn->prepare($query);
+            $stmt  = $this->connection->prepare($query);
             $stmt->execute([":email" => $email]);
 
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -83,7 +97,7 @@ public function updateCustomer(int $customerId, string $name, string $email, ?st
 
     $sql = "UPDATE {$this->table} SET " . implode(", ", $fields) . " WHERE customer_id = :id";
 
-    $stmt = $this->conn->prepare($sql);
+    $stmt = $this->connection->prepare($sql);
     return $stmt->execute($params);
 }
 
@@ -112,27 +126,27 @@ public function updateMerchant(int $merchantId, string $name, string $email, ?st
 
     $sql = "UPDATE {$this->table} SET " . implode(", ", $fields) . " WHERE merchant_id = :id";
 
-    $stmt = $this->conn->prepare($sql);
+    $stmt = $this->connection->prepare($sql);
     return $stmt->execute($params);
 }
 
 public function deleteCustomer($id)
 {
-    $stmt = $this->conn->prepare("DELETE FROM customers WHERE customer_id = ?");
+    $stmt = $this->connection->prepare("DELETE FROM customers WHERE customer_id = ?");
     return $stmt->execute([$id]);
 }
 
 
 public function deleteMerchant($id)
 {
-    $stmt = $this->conn->prepare("DELETE FROM merchants WHERE merchant_id = ?");
+    $stmt = $this->connection->prepare("DELETE FROM merchants WHERE merchant_id = ?");
     return $stmt->execute([$id]);
 }
 
 
 public function getCustomerPoints(int $customerId): int
 {
-    $stmt = $this->conn->prepare(
+    $stmt = $this->connection->prepare(
         "SELECT points FROM customers WHERE customer_id = ?"
     );
     $stmt->execute([$customerId]);
@@ -149,7 +163,7 @@ public function addPoints(int $customerId, int $points): bool
         throw new Exception("addPoints can only be used with customers table.");
     }
 
-    $stmt = $this->conn->prepare(
+    $stmt = $this->connection->prepare(
         "UPDATE customers 
          SET points = points + :points 
          WHERE customer_id = :id"

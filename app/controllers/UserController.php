@@ -30,11 +30,6 @@ class UserController
         require ROOT_PATH . "/app/views/users/select_type.php";
     }
 
-    // public function handleUserType()
-    // {
-    //     $this->selectUserType();
-    // }
-
 
     public function registerCustomer()
     {
@@ -245,7 +240,7 @@ class UserController
     }
 
 
-    public function redeemedOffers()
+    public function myredeemedOffers()
     {
         if (!isset($_SESSION["user"]) || $_SESSION["role"] !== "customer") {
             header("Location: /Test_project/public/login");

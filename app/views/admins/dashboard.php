@@ -74,7 +74,7 @@
         <a href="/Test_project/public/admins/view_merchants">🛒 View Merchants</a>
         <a href="/Test_project/public/admins/view_subscriptions">📄 View Subscriptions</a>
         <a href="/Test_project/public/admins/view_offers">📦 View Offers</a>
-        <a href="/Test_project/public">🚪 Logout</a>
+        <a href="/Test_project/public/admins/login">🚪 Logout</a>
     </div>
 
     <div class="col-9 content">

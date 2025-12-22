@@ -137,27 +137,6 @@ class AdminController
 }
 
 
-    // public function deleteMerchant()
-    // {
-    //     if (!isset($_SESSION['admin'])) {
-    //         header("Location: /Test_project/public/admins/login");
-    //         exit;
-    //     }
-
-    //     if (!isset($_GET['id'])) die("Missing ID");
-
-    //     $id = (int)$_GET['id'];
-
-    //     require_once ROOT_PATH . "/app/models/UserModel.php";
-    //     $model = new UserModel("merchant");
-    //     $model->deleteMerchant($id);
-
-    //     header("Location: /Test_project/public/admins/view_merchants");
-    //     exit;
-    // }
-
-
-
     public function deleteMerchant()
 {
     if (!isset($_SESSION['admin'])) {
@@ -221,6 +200,15 @@ class AdminController
         exit;
     } 
 
-    //
+
+    public function logout()
+    {
+        session_start();
+        $_SESSION = [];
+        session_destroy();
+
+        header("Location: /Test_project/public/admins/login");
+        exit;
+    }
 }
 

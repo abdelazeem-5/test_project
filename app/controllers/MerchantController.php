@@ -99,10 +99,8 @@ class MerchantController
             return;
         }
 
-        // GET → show edit form
         $offer = $model->getOfferById($id);
 
-        // إصلاح: إرسال offer بشكل صريح إلى الـ view
         require ROOT_PATH . "/app/views/merchants/edit_offers.php";
     }
 

@@ -3,27 +3,27 @@ require_once __DIR__ . "/../config/database.php";
 
 class SubscriptionModel
 {
-    private $conn;
+    private $connection;
     private $table = "subscriptions";
 
     public function __construct()
     {
         $db = new Database();
-        $this->conn = $db->connect();
+        $this->connection = $db->connect();
     }
 
 
     public function createSubscription($customer_id, $tier = 'silver', $program_type = 'points_based')
 {
     $deleteQuery = "DELETE FROM {$this->table} WHERE customer_id = :customer_id";
-    $deleteStmt = $this->conn->prepare($deleteQuery);
+    $deleteStmt = $this->connection->prepare($deleteQuery);
     $deleteStmt->execute([":customer_id" => $customer_id]);
 
     $query = "INSERT INTO {$this->table} 
             (customer_id, tier, program_type, status)
             VALUES (:customer_id, :tier, :program_type, 'active')";
 
-    $stmt = $this->conn->prepare($query);
+    $stmt = $this->connection->prepare($query);
 
     return $stmt->execute([
         ":customer_id" => $customer_id,
@@ -37,7 +37,7 @@ class SubscriptionModel
     {
         $query = "SELECT * FROM {$this->table} WHERE customer_id = :customer_id";
 
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->connection->prepare($query);
         $stmt->execute([":customer_id" => $customer_id]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -66,26 +66,17 @@ class SubscriptionModel
                   SET $updateFields 
                   WHERE subscription_id = :id";
 
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->connection->prepare($query);
         return $stmt->execute($params);
     }
 
-    public function cancelSubscription(int $subscription_id): bool
-    {
-        $query = "UPDATE {$this->table} 
-                  SET status = 'cancelled' 
-                  WHERE subscription_id = :id";
 
-        $stmt = $this->conn->prepare($query);
-        return $stmt->execute([":id" => $subscription_id]);
-    }
-
-    public function getSubscriptionById(int $subscription_id): array|false
+    public function getSubscriptionById($subscription_id)
     {
         $query = "SELECT * FROM {$this->table} 
                   WHERE subscription_id = :id";
 
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->connection->prepare($query);
         $stmt->execute([":id" => $subscription_id]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -99,7 +90,7 @@ public function getSubscriptionByCustomerId($customerId)
               WHERE customer_id = :customer_id 
               LIMIT 1";
 
-    $stmt = $this->conn->prepare($query);
+    $stmt = $this->connection->prepare($query);
     $stmt->execute([
         ":customer_id" => $customerId
     ]);
@@ -109,7 +100,7 @@ public function getSubscriptionByCustomerId($customerId)
 
 public function deleteSubscription($id)
 {
-    $stmt = $this->conn->prepare("
+    $stmt = $this->connection->prepare("
         DELETE FROM subscriptions 
         WHERE subscription_id = :id
     ");
@@ -122,7 +113,7 @@ public function deleteSubscription($id)
 
 public function deleteByCustomer($customerId)
 {
-    $stmt = $this->conn->prepare(
+    $stmt = $this->connection->prepare(
         "DELETE FROM subscriptions WHERE customer_id = ?"
     );
     return $stmt->execute([$customerId]);
